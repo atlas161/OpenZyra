@@ -618,6 +618,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 { label: 'Fonctionnalités', onClick: onOpenFeatures, icon: Sparkles },
                 { label: 'Tutoriels', onClick: onOpenTutorials, icon: BookOpen },
                 { label: 'FAQ', onClick: onOpenFAQ, icon: HelpCircle },
+                { label: 'Contact', onClick: onOpenContact, icon: Mail },
               ].map((item, i) => (
                 item.onClick && (
                   <button

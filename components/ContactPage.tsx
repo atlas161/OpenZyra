@@ -201,7 +201,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBack }) => {
               method="POST"
               data-netlify="true"
               netlify-honeypot="bot-field"
-              data-netlify-recaptcha="true"
             >
               {/* Hidden input for Netlify form handling */}
               <input type="hidden" name="form-name" value="contact" />
@@ -340,9 +339,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBack }) => {
                   <span className="text-sm">{error}</span>
                 </div>
               )}
-
-              {/* Netlify reCAPTCHA */}
-              <div data-netlify-recaptcha="true" className="flex justify-center" />
 
               {/* Submit Button */}
               <button
