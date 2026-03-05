@@ -399,7 +399,7 @@ export const FAQPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         {/* SEO Footer */}
         <footer className="mt-16 pt-8 border-t border-slate-200/50">
           <div className="text-center max-w-2xl mx-auto">
-            <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-8 w-auto mx-auto mb-2" />
+            <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="154" height="32" className="h-8 w-auto mx-auto mb-2" />
             <p className="text-sm text-slate-500 mb-4">
               {data.seo.description}
             </p>

@@ -99,7 +99,7 @@ export const HelpPage: React.FC<HelpPageProps> = ({ onBack }) => {
       <nav className={`w-full px-6 py-4 flex justify-between items-center max-w-6xl mx-auto relative z-10
                       transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
         <div className="flex items-center gap-3">
-          <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-10 w-auto" />
+          <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="192" height="40" className="h-10 w-auto" />
         </div>
         <button 
           onClick={handleBack}
@@ -240,7 +240,7 @@ export const HelpPage: React.FC<HelpPageProps> = ({ onBack }) => {
                          ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-8 w-auto" />
+            <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="154" height="32" className="h-8 w-auto" />
           </div>
           
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs text-slate-500">

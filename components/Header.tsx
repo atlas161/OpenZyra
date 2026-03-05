@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
           className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity"
           title="Retour à l'accueil"
         >
-          <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-8 md:h-10 w-auto" />
+          <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="154" height="32" className="h-8 md:h-10 w-auto" />
         </motion.button>
       </div>
       

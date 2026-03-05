@@ -12,7 +12,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ onBack }) => {
       <header className="w-full px-6 py-4 border-b border-slate-200/40 bg-white/80 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-8 w-auto" />
+            <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="154" height="32" className="h-8 w-auto" />
             <span className="text-slate-400 text-sm">Mentions légales</span>
           </div>
           <button

@@ -76,7 +76,7 @@ export const DocumentationPage: React.FC<DocumentationPageProps> = ({ onBack }) 
       <header className="bg-white/80 backdrop-blur-md border-b border-[#5087FF]/30 shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
              <div className="flex items-center gap-3">
-                <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-10 w-auto" />
+                <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="192" height="40" className="h-10 w-auto" />
              </div>
              <button 
                 onClick={onBack} 
@@ -365,7 +365,7 @@ export const DocumentationPage: React.FC<DocumentationPageProps> = ({ onBack }) 
 
        <footer className="bg-white/80 backdrop-blur-sm py-8 text-center border-t border-[#5087FF]/30 mt-12">
             <div className="flex items-center justify-center gap-2 mb-2">
-                <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-8 w-auto" />
+                <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="154" height="32" className="h-8 w-auto" />
             </div>
             <p className="text-slate-500 text-sm">Documentation Open Source - v3.0</p>
             <p className="text-slate-400 text-xs mt-1">100% Client-side • Vos données restent privées</p>

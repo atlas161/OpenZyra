@@ -313,7 +313,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
                          ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-6 w-auto opacity-50" />
+            <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="115" height="24" className="h-6 w-auto opacity-50" />
             <span className="text-slate-400 text-xs">© {new Date().getFullYear()} OpenZyra</span>
           </div>
           

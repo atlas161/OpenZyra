@@ -138,7 +138,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBack }) => {
           >
             <ArrowLeft size={20} />
           </button>
-          <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-10 w-auto" />
+          <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="192" height="40" className="h-10 w-auto" />
         </div>
       </header>
 

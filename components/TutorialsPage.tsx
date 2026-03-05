@@ -597,7 +597,7 @@ export const TutorialsPage: React.FC<TutorialsPageProps> = ({
       {/* Footer */}
       <footer className="bg-white/80 backdrop-blur-sm py-8 text-center border-t border-[#5087FF]/30 mt-12">
         <div className="flex items-center justify-center gap-2 mb-2">
-          <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-8 w-auto" />
+          <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="154" height="32" className="h-8 w-auto" />
         </div>
         <p className="text-slate-500 text-sm mb-1">© {new Date().getFullYear()} OpenZyra - Licence GNU GPL v3.0</p>
         <div className="flex items-center justify-center gap-4 text-xs text-slate-400 mt-2">

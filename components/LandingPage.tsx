@@ -727,7 +727,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-10 md:h-12 w-auto" />
+              <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="231" height="48" className="h-10 md:h-12 w-auto" />
             </div>
                         {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-1">
@@ -808,7 +808,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         {/* Header du menu */}
         <div className="flex items-center justify-between p-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-8 w-auto" />
+            <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="154" height="32" className="h-8 w-auto" />
           </div>
           <button
             onClick={() => setMobileMenuOpen(false)}
@@ -1152,9 +1152,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* Footer */}
       <footer className="border-t border-slate-200 py-8">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-6 w-auto opacity-60" />
+          <img src="/medias/OpenZyra.webp" alt="OpenZyra" width="154" height="32" className="h-8 md:h-10 w-auto opacity-60" />
           <div className="flex items-center gap-4 text-sm text-slate-400">
-            <span>© {new Date().getFullYear()} OpenZyra</span>
+            <span> {new Date().getFullYear()} OpenZyra</span>
             <span>•</span>
             <button 
               onClick={onOpenLegal}
