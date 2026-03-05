@@ -74,7 +74,7 @@ Les fichiers de production seront générés dans le dossier `dist/`.
 
 ### 1. Exportez vos données OVH
 
-Connectez-vous à votre [espace client OVH](https://www.ovhtelecom.fr/manager/) et téléchargez vos relevés d'appels en format CSV.
+Connectez-vous à votre [espace client OVH](https://www.ovh.com) et téléchargez vos relevés d'appels au format CSV : Onglet **Telecom** → Volet **Téléphonie** → Sélectionnez votre **groupe de téléphonie** → **Tableau de bord** → **Je veux...** → **Voir mes relevés de consommation** → Choisissez le mois (ex: sélectionnez septembre pour analyser août) → **3 petits points** → **Listing de vos appels reçus au format CSV**.
 
 ### 2. Importez dans OpenZyra
 

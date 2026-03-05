@@ -17,36 +17,66 @@
       "steps": [
         {
           "step": 1,
-          "title": "Connectez-vous à votre espace client OVH",
-          "content": "Rendez-vous sur www.ovh.com et connectez-vous avec vos identifiants. Accédez à la section 'Téléphonie' dans le menu principal.",
+          "title": "Connectez-vous à OVH",
+          "content": "Rendez-vous sur www.ovh.com et connectez-vous avec vos identifiants client.",
           "tip": "Assurez-vous d'avoir les droits d'administrateur sur le groupe de téléphonie."
         },
         {
           "step": 2,
-          "title": "Sélectionnez votre groupe de téléphonie",
-          "content": "Dans le tableau de bord Téléphonie, cliquez sur le groupe concerné (ex: 'Groupe-123456'). Puis sélectionnez la ligne que vous souhaitez analyser.",
-          "tip": "Si vous avez plusieurs lignes, vous devrez répéter l'opération pour chacune."
+          "title": "Accédez à l'onglet Telecom",
+          "content": "Dans l'espace client OVH, cliquez sur l'onglet 'Telecom' en haut de la page.",
+          "tip": "Si vous ne voyez pas l'onglet Telecom, vérifiez que vous êtes sur le bon compte."
         },
         {
           "step": 3,
-          "title": "Accédez aux statistiques et relevés",
-          "content": "Dans le menu de gauche, cliquez sur 'Relevés détaillés' ou 'Consommation'. Choisissez la période souhaitée (maximum 6 mois par export).",
-          "tip": "Pour une analyse complète avec OpenZyra, exportez les 3 derniers mois."
+          "title": "Ouvrez le volet Téléphonie",
+          "content": "Cliquez sur le volet 'Téléphonie' dans le menu de gauche.",
+          "tip": "Ce volet regroupe toutes les options liées à votre téléphonie OVH."
         },
         {
           "step": 4,
-          "title": "Téléchargez au format CSV",
-          "content": "Cliquez sur le bouton 'Télécharger' ou l'icône de téléchargement. Sélectionnez le format CSV (et non PDF). Choisissez l'encodage UTF-8 si proposé.",
-          "tip": "Le fichier CSV est nécessaire pour OpenZyra. Le format PDF ne peut pas être analysé automatiquement."
+          "title": "Sélectionnez votre groupe de téléphonie",
+          "content": "Choisissez le groupe de téléphonie que vous souhaitez analyser dans la liste.",
+          "tip": "Si vous avez plusieurs groupes, vous devrez répéter l'opération pour chacun."
         },
         {
           "step": 5,
-          "title": "Vérifiez votre fichier",
-          "content": "Ouvrez le fichier téléchargé avec Excel ou un éditeur de texte. Vérifiez qu'il contient bien les colonnes : Date, Heure, Numéro source, Numéro destination, Durée, Type d'appel.",
-          "tip": "Si les colonnes sont séparées par des points-virgules (;), c'est normal - OpenZyra gère les deux formats."
+          "title": "Accédez au Tableau de bord",
+          "content": "Cliquez sur 'Tableau de bord' dans le menu de votre groupe de téléphonie.",
+          "tip": "Le tableau de bord centralise les statistiques de votre groupe."
         },
         {
           "step": 6,
+          "title": "Cliquez sur 'Je veux...'",
+          "content": "Dans le Tableau de bord, repérez le bouton 'Je veux...' et cliquez dessus.",
+          "tip": "Ce bouton ouvre un menu avec différentes actions possibles."
+        },
+        {
+          "step": 7,
+          "title": "Sélectionnez 'Voir mes relevés de consommation'",
+          "content": "Dans le menu déroulant, cliquez sur 'Voir mes relevés de consommation'.",
+          "tip": "Cette option vous donne accès aux détails de vos appels."
+        },
+        {
+          "step": 8,
+          "title": "Choisissez le mois à analyser",
+          "content": "Sélectionnez le mois que vous souhaitez analyser dans le calendrier. Attention : pour analyser le mois d'août, vous devez sélectionner septembre (le mois suivant) car les relevés sont générés au mois suivant.",
+          "tip": "Les relevés sont toujours disponibles au mois N+1. Ex: Les appels d'août sont dans le relevé de septembre."
+        },
+        {
+          "step": 9,
+          "title": "Cliquez sur les 3 petits points",
+          "content": "Une fois le mois sélectionné, cliquez sur les 3 petits points (menu d'actions) à côté du mois.",
+          "tip": "Ce menu contient les options d'export des données."
+        },
+        {
+          "step": 10,
+          "title": "Téléchargez le fichier CSV",
+          "content": "Cliquez sur 'Listing de vos appels reçus au format CSV'. Le téléchargement démarre automatiquement.",
+          "tip": "Le fichier CSV contient tous les détails de vos appels : date, heure, durée, numéros..."
+        },
+        {
+          "step": 11,
           "title": "Importez dans OpenZyra",
           "content": "Rendez-vous sur OpenZyra, glissez-déposez votre fichier CSV dans la zone d'upload. L'analyse démarre automatiquement !",
           "tip": "Vous pouvez importer plusieurs fichiers CSV simultanément pour une analyse sur plusieurs mois."

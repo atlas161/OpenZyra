@@ -577,7 +577,265 @@ export const styles = StyleSheet.create({
     marginVertical: 12
   },
   
-  // Definition grid
+  // Minimal KPI Cards - Clean design like StatsCards
+  simpleCard: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    padding: 16,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e5ea',
+    shadowColor: '#000000',
+    shadowOpacity: 0.04,
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 1 }
+  },
+  simpleCardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 8
+  },
+  simpleCardLabel: {
+    fontSize: 9,
+    color: '#86868b',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    flex: 1
+  },
+  simpleCardIcon: {
+    width: 28,
+    height: 28,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  simpleCardIconBlue: { backgroundColor: '#f0f4ff' },
+  simpleCardIconGreen: { backgroundColor: '#f0fdf4' },
+  simpleCardIconRed: { backgroundColor: '#fef2f2' },
+  simpleCardIconAmber: { backgroundColor: '#fffbeb' },
+  simpleCardIconPurple: { backgroundColor: '#f3e8ff' },
+  simpleCardIconText: {
+    fontSize: 12,
+    fontWeight: 'bold'
+  },
+  simpleCardValue: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#1c1c1e',
+    letterSpacing: -0.5,
+    marginBottom: 4
+  },
+  simpleCardValueGreen: { color: '#34c759' },
+  simpleCardValueRed: { color: '#ff3b30' },
+  simpleCardValueAmber: { color: '#f59e0b' },
+  simpleCardSubtext: {
+    fontSize: 9,
+    color: '#aeaeb2',
+    lineHeight: 1.3
+  },
+  // Progress bar for rates
+  progressContainer: {
+    marginTop: 12,
+    height: 4,
+    backgroundColor: '#f2f2f7',
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
+    borderBottomRightRadius: 2,
+    borderBottomLeftRadius: 2,
+    overflow: 'hidden'
+  },
+  progressBarGreen: {
+    height: 4,
+    backgroundColor: '#34c759',
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
+    borderBottomRightRadius: 2,
+    borderBottomLeftRadius: 2
+  },
+  progressBarRed: {
+    height: 4,
+    backgroundColor: '#ff3b30',
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
+    borderBottomRightRadius: 2,
+    borderBottomLeftRadius: 2
+  },
+  // Simple section container
+  simpleSection: {
+    marginBottom: 20
+  },
+  simpleSectionTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#1c1c1e',
+    marginBottom: 12,
+    letterSpacing: -0.3
+  },
+  simpleSectionGrid: {
+    gap: 10
+  },
+  kpiCard: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e8e8ed',
+    overflow: 'hidden',
+    shadowColor: '#1F4597',
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 }
+  },
+  kpiCardHeader: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingHorizontal: 14,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  kpiCardHeaderBlue: {
+    backgroundColor: '#f0f4ff',
+    borderBottomWidth: 2,
+    borderBottomColor: '#0071e3',
+    borderBottomStyle: 'solid'
+  },
+  kpiCardHeaderGreen: {
+    backgroundColor: '#f0fdf4',
+    borderBottomWidth: 2,
+    borderBottomColor: '#34c759',
+    borderBottomStyle: 'solid'
+  },
+  kpiCardHeaderRed: {
+    backgroundColor: '#fef2f2',
+    borderBottomWidth: 2,
+    borderBottomColor: '#ff3b30',
+    borderBottomStyle: 'solid'
+  },
+  kpiCardHeaderAmber: {
+    backgroundColor: '#fffbeb',
+    borderBottomWidth: 2,
+    borderBottomColor: '#f59e0b',
+    borderBottomStyle: 'solid'
+  },
+  kpiCardLabel: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    letterSpacing: 0.8
+  },
+  kpiCardLabelBlue: { color: '#0071e3' },
+  kpiCardLabelGreen: { color: '#34c759' },
+  kpiCardLabelRed: { color: '#ff3b30' },
+  kpiCardLabelAmber: { color: '#f59e0b' },
+  kpiCardContent: {
+    padding: 14,
+    alignItems: 'center'
+  },
+  kpiCardValue: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    letterSpacing: -1,
+    marginBottom: 4
+  },
+  kpiCardValueBlue: { color: '#0071e3' },
+  kpiCardValueGreen: { color: '#34c759' },
+  kpiCardValueRed: { color: '#ff3b30' },
+  kpiCardValueAmber: { color: '#f59e0b' },
+  kpiCardValueDark: { color: '#2c2c2e' },
+  kpiCardSubtext: {
+    fontSize: 9,
+    color: '#86868b',
+    textAlign: 'center',
+    lineHeight: 1.3
+  },
+  kpiCardBadge: {
+    fontSize: 8,
+    fontWeight: 'bold',
+    paddingTop: 3,
+    paddingBottom: 3,
+    paddingHorizontal: 8,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10
+  },
+  kpiCardBadgeGreen: {
+    backgroundColor: '#34c759',
+    color: '#ffffff'
+  },
+  kpiCardBadgeRed: {
+    backgroundColor: '#ff3b30',
+    color: '#ffffff'
+  },
+  kpiCardBadgeAmber: {
+    backgroundColor: '#f59e0b',
+    color: '#ffffff'
+  },
+  // Section container with background
+  statsSection: {
+    backgroundColor: '#ffffff',
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    borderBottomRightRadius: 16,
+    borderBottomLeftRadius: 16,
+    borderWidth: 1,
+    borderColor: '#e8e8ed',
+    padding: 20,
+    marginBottom: 16,
+    shadowColor: '#1F4597',
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 }
+  },
+  statsSectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+    borderBottomStyle: 'solid'
+  },
+  statsSectionIcon: {
+    width: 32,
+    height: 32,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 8,
+    backgroundColor: '#f0f4ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12
+  },
+  statsSectionIconText: {
+    fontSize: 14,
+    color: '#1F4597',
+    fontWeight: 'bold'
+  },
+  statsSectionTitle: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#1F4597',
+    letterSpacing: -0.3
+  },
+  statsSectionSubtitle: {
+    fontSize: 9,
+    color: '#86868b',
+    marginTop: 2
+  },
   defGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',

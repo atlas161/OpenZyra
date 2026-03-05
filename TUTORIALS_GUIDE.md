@@ -235,7 +235,7 @@ Pour un meilleur référencement Google, ajouter le nouveau tutoriel dans `sitem
 
 ```xml
 <url>
-  <loc>https://semaphors.netlify.app/#tutoriels/votre-slug</loc>
+  <loc>https://openzyra.netlify.app/#tutoriels/votre-slug</loc>
   <lastmod>2026-03-04</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>

@@ -44,6 +44,7 @@ import { defaultSchedule } from './utils/schedule';
 // Composants
 import { ConfigModal } from './components/ConfigModal';
 import { LandingPage } from './components/LandingPage';
+import { LegalPage } from './components/LegalPage';
 import { ReportDocument } from './components/pdf/ReportDocument';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
@@ -61,6 +62,7 @@ import { AlternativesPage } from './components/AlternativesPage';
 import { FAQPage } from './components/FAQPage';
 import { ContactPage } from './components/ContactPage';
 import { CallTraceModal } from './components/CallTraceModal';
+import { Breadcrumb } from './components/Breadcrumb';
 
 // =============================================================================
 // ÉTAT GLOBAL DE L'APPLICATION
@@ -149,6 +151,7 @@ const App = () => {
   const [showAlternatives, setShowAlternatives] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  const [showLegal, setShowLegal] = useState(false);
 
   // ─────────────────────────────────────────────────────────────────────────────
   // FILTRES ET PAGINATION
@@ -364,6 +367,20 @@ const App = () => {
     });
     const dailyData = Object.values(dailyMap).sort((a,b) => a.date.localeCompare(b.date));
 
+    // 10.3 Distribution globale (donut chart)
+    const distributionData = [
+      { name: 'Répondus', value: answeredCount, color: '#22C55E' },
+      { name: 'Manqués', value: missedCount, color: '#EF4444' },
+      { name: 'Hors Ouverture', value: outsideCalls.length, color: '#94A3B8' }
+    ].filter(d => d.value > 0);
+
+    // 10.4 Taux de réponse journalier (line chart)
+    const dailyRateData = dailyData.map(d => {
+      const total = d.Répondu + d.Manqué;
+      const rate = total > 0 ? (d.Répondu / total) * 100 : 0;
+      return { date: d.date, rate: Math.round(rate * 10) / 10 };
+    });
+
     // ─────────────────────────────────────────────────────────────────────────
     // RETOUR: données filtrées, stats et graphiques
     // ─────────────────────────────────────────────────────────────────────────
@@ -385,9 +402,97 @@ const App = () => {
           avgCallsOutsideHours,
           totalMissedOutsideHours
       },
-      charts: { hourly: hourlyMap, daily: dailyData }
+      charts: { hourly: hourlyMap, daily: dailyData, distribution: distributionData, dailyRate: dailyRateData }
     };
   }, [data, dateRange, filters]);
+
+  // =============================================================================
+  // GESTION DE LA NAVIGATION - Historique navigateur (bouton retour)
+  // =============================================================================
+  // Permet d'utiliser le bouton retour/avant du navigateur entre les pages
+  // Utilise window.location.hash pour synchroniser l'état avec l'URL
+  // =============================================================================
+
+  // Mapping des hashes vers les états de page
+  const pageStates: Record<string, { 
+    docs: boolean; 
+    tutorials: boolean; 
+    features: boolean; 
+    alternatives: boolean; 
+    faq: boolean; 
+    contact: boolean; 
+    legal: boolean;
+    dashboard: boolean;
+  }> = {
+    'home': { docs: false, tutorials: false, features: false, alternatives: false, faq: false, contact: false, legal: false, dashboard: false },
+    'dashboard': { docs: false, tutorials: false, features: false, alternatives: false, faq: false, contact: false, legal: false, dashboard: true },
+    'docs': { docs: true, tutorials: false, features: false, alternatives: false, faq: false, contact: false, legal: false, dashboard: false },
+    'tutorials': { docs: false, tutorials: true, features: false, alternatives: false, faq: false, contact: false, legal: false, dashboard: false },
+    'features': { docs: false, tutorials: false, features: true, alternatives: false, faq: false, contact: false, legal: false, dashboard: false },
+    'alternatives': { docs: false, tutorials: false, features: false, alternatives: true, faq: false, contact: false, legal: false, dashboard: false },
+    'faq': { docs: false, tutorials: false, features: false, alternatives: false, faq: true, contact: false, legal: false, dashboard: false },
+    'contact': { docs: false, tutorials: false, features: false, alternatives: false, faq: false, contact: true, legal: false, dashboard: false },
+    'legal': { docs: false, tutorials: false, features: false, alternatives: false, faq: false, contact: false, legal: true, dashboard: false },
+  };
+
+  // Fonction pour naviguer vers une page et mettre à jour l'historique
+  const navigateToPage = (page: string) => {
+    const hash = page === 'home' ? '' : `#${page}`;
+    if (window.location.hash !== hash) {
+      window.history.pushState({ page }, '', hash);
+    }
+    updatePageState(page);
+  };
+
+  // Met à jour les états React selon la page
+  const updatePageState = (page: string) => {
+    const state = pageStates[page] || pageStates['home'];
+    setShowDocs(state.docs);
+    setShowTutorials(state.tutorials);
+    setShowFeatures(state.features);
+    setShowAlternatives(state.alternatives);
+    setShowFAQ(state.faq);
+    setShowContact(state.contact);
+    setShowLegal(state.legal);
+  };
+
+  // Navigation automatique vers le dashboard quand des données sont chargées
+  useEffect(() => {
+    if (allRawRecords.length > 0 && !loading && !pendingRawRecords) {
+      // Si on a des données et qu'on n'est pas déjà sur le dashboard, mettre à jour l'URL
+      const currentHash = window.location.hash.slice(1);
+      if (currentHash !== 'dashboard' && !pageStates[currentHash]?.dashboard) {
+        window.history.pushState({ page: 'dashboard' }, '', '#dashboard');
+      }
+    }
+  }, [allRawRecords.length, loading, pendingRawRecords]);
+
+  // Initialisation: lire l'URL au chargement
+  useEffect(() => {
+    const hash = window.location.hash.slice(1) || 'home';
+    updatePageState(hash);
+  }, []);
+
+  // Écouter les changements d'historique (bouton retour/avant)
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const hash = window.location.hash.slice(1) || 'home';
+      updatePageState(hash);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // --- Fonctions de navigation publiques ---
+  const onOpenDocs = () => navigateToPage('docs');
+  const onOpenTutorials = () => navigateToPage('tutorials');
+  const onOpenFeatures = () => navigateToPage('features');
+  const onOpenAlternatives = () => navigateToPage('alternatives');
+  const onOpenFAQ = () => navigateToPage('faq');
+  const onOpenContact = () => navigateToPage('contact');
+  const onOpenLegal = () => navigateToPage('legal');
+  const onBackToHome = () => window.history.back();
 
   // --- Gestionnaires ---
 
@@ -773,6 +878,8 @@ const App = () => {
         status: 'all'
       });
       setIsExiting(false);
+      // Revenir à la page d'accueil dans l'historique
+      navigateToPage('home');
     }, 500);
   };
 
@@ -869,8 +976,12 @@ const App = () => {
 
         const hourlyChartEl = document.getElementById('chart-hourly');
         const dailyChartEl = document.getElementById('chart-daily');
+        const distributionChartEl = document.getElementById('chart-distribution');
+        const dailyRateChartEl = document.getElementById('chart-daily-rate');
         let hourlyImg = null;
         let dailyImg = null;
+        let distributionImg = null;
+        let dailyRateImg = null;
         
         await new Promise(resolve => setTimeout(resolve, 300));
         
@@ -882,13 +993,21 @@ const App = () => {
             const canvas = await html2canvas(dailyChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
             dailyImg = canvas.toDataURL('image/png');
         }
+        if (distributionChartEl) {
+            const canvas = await html2canvas(distributionChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
+            distributionImg = canvas.toDataURL('image/png');
+        }
+        if (dailyRateChartEl) {
+            const canvas = await html2canvas(dailyRateChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
+            dailyRateImg = canvas.toDataURL('image/png');
+        }
         
         const pdfBlob = await pdf(
             <ReportDocument 
                 stats={stats} 
                 config={projectConfig} 
                 dateRange={dateRange} 
-                charts={{ hourly: hourlyImg, daily: dailyImg }}
+                charts={{ hourly: hourlyImg, daily: dailyImg, distribution: distributionImg, dailyRate: dailyRateImg }}
                 chartsData={charts}
                 logoData={logoData}
             />
@@ -958,9 +1077,13 @@ const App = () => {
         // 2. Capture des graphiques en images
         const hourlyChartEl = document.getElementById('chart-hourly');
         const dailyChartEl = document.getElementById('chart-daily');
+        const distributionChartEl = document.getElementById('chart-distribution');
+        const dailyRateChartEl = document.getElementById('chart-daily-rate');
 
         let hourlyImg = null;
         let dailyImg = null;
+        let distributionImg = null;
+        let dailyRateImg = null;
 
         await new Promise(resolve => setTimeout(resolve, 500));
 
@@ -982,13 +1105,31 @@ const App = () => {
             dailyImg = canvas.toDataURL('image/png');
         }
 
+        if (distributionChartEl) {
+            const canvas = await html2canvas(distributionChartEl, { 
+                scale: 2,
+                logging: false,
+                backgroundColor: '#ffffff'
+            });
+            distributionImg = canvas.toDataURL('image/png');
+        }
+
+        if (dailyRateChartEl) {
+            const canvas = await html2canvas(dailyRateChartEl, { 
+                scale: 2,
+                logging: false,
+                backgroundColor: '#ffffff'
+            });
+            dailyRateImg = canvas.toDataURL('image/png');
+        }
+
         // 3. Génération du document PDF avec le logo
         const blob = await pdf(
             <ReportDocument 
                 stats={stats} 
                 config={projectConfig} 
                 dateRange={dateRange} 
-                charts={{ hourly: hourlyImg, daily: dailyImg }}
+                charts={{ hourly: hourlyImg, daily: dailyImg, distribution: distributionImg, dailyRate: dailyRateImg }}
                 chartsData={charts}
                 logoData={logoData}
             />
@@ -1022,38 +1163,124 @@ const App = () => {
 
   // RENDER: Page de Documentation (remplace toute l'app si active)
   if (showDocs) {
-      return <HelpPage onBack={() => setShowDocs(false)} />;
+      return (
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Documentation', onClick: undefined }
+              ]} />
+            </div>
+          </div>
+          <HelpPage onBack={onBackToHome} />
+        </>
+      );
   }
 
   // RENDER: Page de Tutoriels
   if (showTutorials) {
-      return <TutorialsPage 
-          onBack={() => setShowTutorials(false)} 
-          onOpenFAQ={() => setShowFAQ(true)}
-          onOpenFeatures={() => setShowFeatures(true)}
-          onOpenAlternatives={() => setShowAlternatives(true)}
-          onOpenDocs={() => setShowDocs(true)}
-      />;
+      return (
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Tutoriels', onClick: undefined }
+              ]} />
+            </div>
+          </div>
+          <TutorialsPage 
+              onBack={onBackToHome} 
+              onOpenFAQ={onOpenFAQ}
+              onOpenFeatures={onOpenFeatures}
+              onOpenAlternatives={onOpenAlternatives}
+              onOpenDocs={onOpenDocs}
+              onOpenLegal={onOpenLegal}
+          />
+        </>
+      );
   }
 
   // RENDER: Page de Fonctionnalités
   if (showFeatures) {
-      return <FeaturesPage onBack={() => setShowFeatures(false)} />;
-  }
-
-  // RENDER: Page Alternatives & Comparatif
-  if (showAlternatives) {
-      return <AlternativesPage onBack={() => setShowAlternatives(false)} />;
+      return (
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Fonctionnalités', onClick: undefined }
+              ]} />
+            </div>
+          </div>
+          <FeaturesPage 
+              onBack={onBackToHome} 
+              onOpenLegal={onOpenLegal}
+          />
+        </>
+      );
   }
 
   // RENDER: Page FAQ
   if (showFAQ) {
-      return <FAQPage onBack={() => setShowFAQ(false)} />;
+      return (
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'FAQ', onClick: undefined }
+              ]} />
+            </div>
+          </div>
+          <FAQPage onBack={onBackToHome} />
+        </>
+      );
+  }
+
+  // RENDER: Page Mentions Légales
+  if (showLegal) {
+      return (
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Mentions Légales', onClick: undefined }
+              ]} />
+            </div>
+          </div>
+          <LegalPage onBack={onBackToHome} />
+        </>
+      );
   }
 
   // RENDER: Page Contact
   if (showContact) {
-      return <ContactPage onBack={() => setShowContact(false)} />;
+      return (
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Contact', onClick: undefined }
+              ]} />
+            </div>
+          </div>
+          <ContactPage onBack={onBackToHome} />
+        </>
+      );
+  }
+
+  // RENDER: Page Alternatives
+  if (showAlternatives) {
+      return (
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Alternatives', onClick: undefined }
+              ]} />
+            </div>
+          </div>
+          <AlternativesPage onBack={onBackToHome} />
+        </>
+      );
   }
 
   // RENDER: App Principale - Landing Page when no data
@@ -1063,12 +1290,13 @@ const App = () => {
             <div className={`transition-all duration-500 ${isExiting ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
                 <LandingPage 
                   handleFileUpload={handleFileUpload} 
-                  onOpenDocs={() => setShowDocs(true)}
-                  onOpenTutorials={() => setShowTutorials(true)}
-                  onOpenFeatures={() => setShowFeatures(true)}
-                  onOpenAlternatives={() => setShowAlternatives(true)}
-                  onOpenFAQ={() => setShowFAQ(true)}
-                  onOpenContact={() => setShowContact(true)}
+                  onOpenDocs={onOpenDocs}
+                  onOpenTutorials={onOpenTutorials}
+                  onOpenFeatures={onOpenFeatures}
+                  onOpenAlternatives={onOpenAlternatives}
+                  onOpenFAQ={onOpenFAQ}
+                  onOpenContact={onOpenContact}
+                  onOpenLegal={onOpenLegal}
                   error={error} 
                   isExiting={isExiting}
                 />
@@ -1113,7 +1341,7 @@ const App = () => {
           handleExportJSON={handleExportJSON}
           isPdfGenerating={isPdfGenerating}
           isZipGenerating={isZipGenerating}
-          onOpenDocs={() => setShowTutorials(true)}
+          onOpenDocs={onOpenTutorials}
           onReset={handleReset}
         />
 

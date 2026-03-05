@@ -198,6 +198,15 @@ export interface ChartsData {
     Manqué: number;          // Appels manqués ce jour
     HorsOuverture: number;   // Appels hors ouverture ce jour
   }[];
+  distribution: {
+    name: string;            // Label: "Répondus", "Manqués", "Hors Ouverture"
+    value: number;           // Nombre d'appels
+    color: string;           // Couleur hex
+  }[];
+  dailyRate: {
+    date: string;            // Date (YYYY-MM-DD)
+    rate: number;            // Taux de réponse (0-100)
+  }[];
 }
 
 // =============================================================================

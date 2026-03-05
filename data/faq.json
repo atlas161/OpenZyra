@@ -84,7 +84,7 @@
       "id": "comment-commencer",
       "category": "utilisation",
       "question": "Comment commencer avec OpenZyra ?",
-      "answer": "C'est très simple : 1) Connectez-vous à votre espace client OVH et téléchargez vos relevés d'appels en format CSV. 2) Rendez-vous sur OpenZyra et glissez-déposez vos fichiers CSV. 3) Configurez vos lignes NDI/SIP si nécessaire. 4) Consultez vos statistiques instantanément ! Aucune inscription, aucune installation, ça marche immédiatement.",
+      "answer": "C'est très simple : 1) Connectez-vous à l'espace client OVH (www.ovh.com), allez dans l'onglet Telecom → Téléphonie → sélectionnez votre groupe → Tableau de bord → Je veux... → Voir mes relevés de consommation → choisissez le mois (ex: septembre pour analyser août) → 3 petits points → Listing de vos appels reçus au format CSV pour télécharger vos relevés. 2) Rendez-vous sur OpenZyra et glissez-déposez vos fichiers CSV. 3) Configurez vos lignes NDI/SIP si nécessaire. 4) Consultez vos statistiques instantanément ! Aucune inscription, aucune installation, ça marche immédiatement.",
       "keywords": ["comment utiliser OpenZyra", "démarrer OpenZyra", "tutoriel"]
     },
     {
@@ -161,7 +161,7 @@
       "id": "telecharger-csv-ovh",
       "category": "ovh",
       "question": "Comment télécharger mes relevés CSV depuis OVH ?",
-      "answer": "Pour télécharger vos relevés : 1) Connectez-vous à l'espace client OVH (www.ovh.com/manager). 2) Allez dans 'Téléphonie' puis sélectionnez votre groupe ou ligne. 3) Cliquez sur 'Consommation' ou 'Relevés d'appels'. 4) Sélectionnez la période souhaitée. 5) Cliquez sur 'Télécharger' et choisissez le format CSV. Vous pouvez aussi automatiser via l'API OVH si vous avez des compétences techniques.",
+      "answer": "Pour télécharger vos relevés CSV depuis OVH : 1) Connectez-vous à l'espace client OVH (www.ovh.com). 2) Allez dans l'onglet 'Telecom' puis le volet 'Téléphonie'. 3) Sélectionnez votre groupe de téléphonie. 4) Accédez au 'Tableau de bord'. 5) Cliquez sur 'Je veux...' puis 'Voir mes relevés de consommation'. 6) Sélectionnez le mois à analyser (attention : pour analyser le mois d'août, il faut sélectionner septembre). 7) Cliquez sur les 3 petits points à côté du mois. 8) Choisissez 'Listing de vos appels reçus au format CSV'. Le téléchargement démarre automatiquement.",
       "keywords": ["télécharger csv ovh", "relevés appels ovh", "export ovh"]
     },
     {

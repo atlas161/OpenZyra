@@ -7,8 +7,10 @@ import {
   Zap, 
   ArrowRight,
   HelpCircle,
-  FileText
+  FileText,
+  Scale
 } from 'lucide-react';
+import LegalPage from './LegalPage';
 
 interface EmptyStateProps {
   handleFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -147,6 +149,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   isExiting 
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [showLegal, setShowLegal] = useState(false);
 
   useEffect(() => {
     if (!isExiting) {
@@ -155,6 +158,10 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       setIsVisible(false);
     }
   }, [isExiting]);
+
+  if (showLegal) {
+    return <LegalPage onBack={() => setShowLegal(false)} />;
+  }
 
   return (
     <div className={`h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-gradient-to-br from-slate-50 via-white to-slate-100 flex flex-col font-sans relative transition-all duration-500 ${isExiting ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
@@ -311,13 +318,20 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
           </div>
           
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs text-slate-400">
-            <span className="text-slate-500 text-center">Application créée et administrée par Angelo DISCEPOLI - Technicien SEMAPHORS</span>
+            <span className="text-slate-500 text-center">Application créée et administrée par Angelo DISCEPOLI - Fondateur OpenZyra</span>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1.5">
                 <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
                 <span>Système opérationnel</span>
               </div>
-              <a href="mailto:angelo.discepoli@semaphors.com" className="hover:text-[#1F4597] transition-colors">
+              <button 
+                onClick={() => setShowLegal(true)}
+                className="hover:text-[#1F4597] transition-colors flex items-center gap-1"
+              >
+                <Scale size={12} />
+                Mentions légales
+              </button>
+              <a href="mailto:contact@openzyra.app" className="hover:text-[#1F4597] transition-colors">
                 Support
               </a>
             </div>

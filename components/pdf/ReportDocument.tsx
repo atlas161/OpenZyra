@@ -11,6 +11,8 @@ interface ReportDocumentProps {
   charts: {
     hourly: string | null;
     daily: string | null;
+    distribution: string | null;
+    dailyRate: string | null;
   };
   chartsData?: ChartsData;
   logoData: string | null;
@@ -289,7 +291,7 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
       {/* PAGE 2: GUIDE & EXPLICATIONS */}
       <Page size="A4" style={styles.page}>
         <BackgroundDecoration />
-        <PageHeader title="Guide de Compréhension" subtitle={periodStr} />
+        <PageHeader title="Guide de compréhension" subtitle={periodStr} />
 
         <View style={styles.row}>
           {/* NDI Section */}
@@ -341,8 +343,8 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
 
         {/* Comment ça marche ensemble */}
         <View style={styles.guideFullCard} wrap={false}>
-          <View style={[styles.guideCardHeader, { backgroundColor: '#f3e8ff' }]}>
-            <Text style={[styles.guideCardTitle, { color: '#2563EB' }]}>Comment ça fonctionne ensemble ?</Text>
+          <View style={[styles.guideCardHeader, { backgroundColor: '#fef3c7' }]}>
+            <Text style={[styles.guideCardTitle, { color: '#92400e' }]}>Comment ça fonctionne ensemble ?</Text>
           </View>
           <View style={styles.guideCardContent}>
             <View style={styles.flowStep}>
@@ -373,12 +375,12 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
       {/* PAGE 3: CALCULS & FORMULES */}
       <Page size="A4" style={styles.page}>
         <BackgroundDecoration />
-        <PageHeader title="Comprendre les Calculs" subtitle={periodStr} />
+        <PageHeader title="Comprendre les calculs" subtitle={periodStr} />
 
         <View style={styles.row}>
           {/* KPI Calculations */}
           <View style={[styles.calcCard, { flex: 1 }]} wrap={false}>
-            <Text style={styles.calcTitle}>Indicateurs Clés</Text>
+            <Text style={styles.calcTitle}>Indicateurs clés</Text>
             
             <View style={styles.calcItem}>
               <Text style={styles.calcLabel}>Taux de Réponse</Text>
@@ -405,7 +407,7 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
 
           {/* Time Calculations */}
           <View style={[styles.calcCard, { flex: 1 }]} wrap={false}>
-            <Text style={styles.calcTitle}>Temps & Durées</Text>
+            <Text style={styles.calcTitle}>Temps & durées</Text>
             
             <View style={styles.calcItem}>
               <Text style={styles.calcLabel}>Temps d'Attente Moyen</Text>
@@ -434,7 +436,7 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
         {/* Definitions */}
         <View style={styles.guideFullCard} wrap={false}>
           <View style={[styles.guideCardHeader, { backgroundColor: '#fef3c7' }]}>
-            <Text style={[styles.guideCardTitle, { color: '#92400e' }]}>Définitions des Termes</Text>
+            <Text style={[styles.guideCardTitle, { color: '#92400e' }]}>Définitions des termes</Text>
           </View>
           <View style={styles.defGrid}>
             <View style={styles.defItem}>
@@ -459,91 +461,139 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
         <PageFooter />
       </Page>
 
-      {/* PAGE 4: KPI & GLOBAL STATS */}
+        {/* PAGE 4: KPI & GLOBAL STATS */}
       <Page size="A4" style={styles.page}>
         <BackgroundDecoration />
-        <PageHeader title="Performance Globale" subtitle={periodStr} />
+        <PageHeader title="Performance globale" subtitle={periodStr} />
 
-        <View style={styles.section} wrap={false}>
-          <Text style={styles.sectionTitle}>Vue d'Ensemble</Text>
-          <Text style={styles.sectionDescription}>
-            Synthèse des flux entrants et de la qualité de service. Ces indicateurs reflètent l'efficacité globale de votre accueil téléphonique.
-          </Text>
-          
+        {/* Vue d'ensemble - Volume */}
+        <View style={styles.simpleSection} wrap={false}>
+          <Text style={styles.simpleSectionTitle}>Volume d'appels</Text>
           <View style={styles.row}>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Volume Total</Text>
-              <Text style={[styles.cardValue, { color: '#0071e3' }]}>{stats.totalCalls}</Text>
-              <Text style={styles.cardSubtext}>Appels présentés</Text>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Appels entrants</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconBlue]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#1F4597' }]}>P</Text>
+                </View>
+              </View>
+              <Text style={styles.simpleCardValue}>{stats.totalCalls}</Text>
+              <Text style={styles.simpleCardSubtext}>Total présentés</Text>
             </View>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Appels Traités</Text>
-              <Text style={[styles.cardValue, { color: '#34c759' }]}>{stats.answeredCount}</Text>
-              <Text style={styles.cardSubtext}>Pris en charge</Text>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Répondus</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconGreen]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#34c759' }]}>C</Text>
+                </View>
+              </View>
+              <Text style={[styles.simpleCardValue, styles.simpleCardValueGreen]}>{stats.answeredCount}</Text>
+              <Text style={styles.simpleCardSubtext}>Pris en charge</Text>
             </View>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Appels Perdus</Text>
-              <Text style={[styles.cardValue, { color: '#ff3b30' }]}>{stats.missedCount}</Text>
-              <Text style={styles.cardSubtext}>Sans réponse</Text>
-            </View>
-          </View>
-
-          <View style={styles.row}>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Qualité de Service</Text>
-              <Text style={[styles.cardValue, { color: '#34c759' }]}>{stats.answeredRate.toFixed(1)}%</Text>
-              <Text style={styles.cardSubtext}>Taux de réponse</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Taux de Perte</Text>
-              <Text style={[styles.cardValue, { color: '#ff3b30' }]}>{stats.missedRate.toFixed(1)}%</Text>
-              <Text style={styles.cardSubtext}>Appels abandonnés</Text>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Perdus</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconRed]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#ff3b30' }]}>M</Text>
+                </View>
+              </View>
+              <Text style={[styles.simpleCardValue, styles.simpleCardValueRed]}>{stats.missedCount}</Text>
+              <Text style={styles.simpleCardSubtext}>Sans réponse</Text>
             </View>
           </View>
         </View>
 
-        <View style={styles.section} wrap={false}>
-          <Text style={styles.sectionTitle}>Temps & Activité</Text>
-          <Text style={styles.sectionDescription}>
-            Analyse combinée de la fluidité de prise en charge (temps d'attente), de la durée des échanges et de la sollicitation hors horaires d'ouverture.
-          </Text>
-          
+        {/* Taux de performance avec barres */}
+        <View style={styles.simpleSection} wrap={false}>
+          <Text style={styles.simpleSectionTitle}>Performance</Text>
           <View style={styles.row}>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Attente Moyenne</Text>
-              <Text style={styles.cardValue}>{formatDuration(stats.avgAnsweredWaitTime)}</Text>
-              <Text style={styles.cardSubtext}>Avant décrochage</Text>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Taux de réponse</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconGreen]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#34c759' }]}>%</Text>
+                </View>
+              </View>
+              <Text style={[styles.simpleCardValue, styles.simpleCardValueGreen]}>{stats.answeredRate.toFixed(1)}%</Text>
+              <View style={styles.progressContainer}>
+                <View style={[styles.progressBarGreen, { width: `${stats.answeredRate}%` }]} />
+              </View>
             </View>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Attente Cumulée</Text>
-              <Text style={styles.cardValue}>{formatDuration(totalWaitTime)}</Text>
-              <Text style={styles.cardSubtext}>Total attente clients</Text>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Taux de perte</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconRed]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#ff3b30' }]}>%</Text>
+                </View>
+              </View>
+              <Text style={[styles.simpleCardValue, styles.simpleCardValueRed]}>{stats.missedRate.toFixed(1)}%</Text>
+              <View style={styles.progressContainer}>
+                <View style={[styles.progressBarRed, { width: `${stats.missedRate}%` }]} />
+              </View>
             </View>
           </View>
-          
-          <View style={styles.row}>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Durée Moyenne</Text>
-              <Text style={styles.cardValue}>{formatDuration(stats.avgCallDuration)}</Text>
-              <Text style={styles.cardSubtext}>Temps de conversation</Text>
-            </View>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Durée Totale</Text>
-              <Text style={styles.cardValue}>{formatDuration(stats.totalDuration)}</Text>
-              <Text style={styles.cardSubtext}>Volume conversationnel</Text>
-            </View>
-          </View>
+        </View>
 
+        {/* Temps */}
+        <View style={styles.simpleSection} wrap={false}>
+          <Text style={styles.simpleSectionTitle}>Durées</Text>
           <View style={styles.row}>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Appels Hors Ouverture</Text>
-              <Text style={styles.cardValue}>{stats.totalMissedOutsideHours}</Text>
-              <Text style={styles.cardSubtext}>Volume en fermeture</Text>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Durée moyenne</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconPurple]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#9333ea' }]}>T</Text>
+                </View>
+              </View>
+              <Text style={styles.simpleCardValue}>{formatDuration(stats.avgCallDuration)}</Text>
+              <Text style={styles.simpleCardSubtext}>Par appel</Text>
             </View>
-            <View style={styles.card}>
-              <Text style={styles.cardLabel}>Moyenne / Jour</Text>
-              <Text style={styles.cardValue}>{Math.round(stats.avgCallsOutsideHours)}</Text>
-              <Text style={styles.cardSubtext}>Flux hors horaires</Text>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Durée totale</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconBlue]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#1F4597' }]}>H</Text>
+                </View>
+              </View>
+              <Text style={styles.simpleCardValue}>{formatDuration(stats.totalDuration)}</Text>
+              <Text style={styles.simpleCardSubtext}>Toutes conversations</Text>
+            </View>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Attente moyenne</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconAmber]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#f59e0b' }]}>A</Text>
+                </View>
+              </View>
+              <Text style={[styles.simpleCardValue, styles.simpleCardValueAmber]}>{formatDuration(stats.avgAnsweredWaitTime)}</Text>
+              <Text style={styles.simpleCardSubtext}>Avant décrochage</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Hors horaires */}
+        <View style={styles.simpleSection} wrap={false}>
+          <Text style={styles.simpleSectionTitle}>Hors ouverture</Text>
+          <View style={styles.row}>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Total hors horaires</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconRed]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#ff3b30' }]}>!</Text>
+                </View>
+              </View>
+              <Text style={[styles.simpleCardValue, styles.simpleCardValueRed]}>{stats.totalMissedOutsideHours}</Text>
+              <Text style={styles.simpleCardSubtext}>Appels en fermeture</Text>
+            </View>
+            <View style={styles.simpleCard}>
+              <View style={styles.simpleCardHeader}>
+                <Text style={styles.simpleCardLabel}>Moyenne / jour</Text>
+                <View style={[styles.simpleCardIcon, styles.simpleCardIconAmber]}>
+                  <Text style={[styles.simpleCardIconText, { color: '#f59e0b' }]}>J</Text>
+                </View>
+              </View>
+              <Text style={[styles.simpleCardValue, styles.simpleCardValueAmber]}>{Math.round(stats.avgCallsOutsideHours)}</Text>
+              <Text style={styles.simpleCardSubtext}>Flux quotidien</Text>
             </View>
           </View>
         </View>
@@ -554,11 +604,11 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
       {/* PAGE 5: CHARTS */}
       <Page size="A4" style={styles.page}>
         <BackgroundDecoration />
-        <PageHeader title="Analyses Graphiques" subtitle={periodStr} />
+        <PageHeader title="Analyses graphiques" subtitle={periodStr} />
 
         {charts.hourly && (
           <View style={styles.section} wrap={false}>
-            <Text style={styles.sectionTitle}>Distribution Horaire</Text>
+            <Text style={styles.sectionTitle}>Distribution horaire</Text>
             <Text style={styles.sectionDescription}>
               Ce graphique illustre la répartition des appels tout au long de la journée (cumul sur la période globale). Il permet d'identifier facilement les pics d'activité (heures de pointe) ainsi que les creux. Ces informations sont précieuses pour optimiser la planification de vos effectifs en interne.
             </Text>
@@ -575,12 +625,36 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
 
         {charts.daily && (
           <View style={styles.section} wrap={false}>
-            <Text style={styles.sectionTitle}>Évolution Quotidienne</Text>
+            <Text style={styles.sectionTitle}>Évolution quotidienne</Text>
             <Text style={styles.sectionDescription}>
               Suivi du volume d'appels jour par jour sur l'ensemble de la période analysée. Cette chronologie permet de repérer les tendances à court et moyen terme, d'identifier les variations liées aux jours de la semaine, et d'observer l'impact d'événements spécifiques externes.
             </Text>
             <View style={styles.chartContainer}>
               <Image src={charts.daily} style={styles.chartImage} />
+            </View>
+          </View>
+        )}
+
+        {charts.distribution && (
+          <View style={styles.section} wrap={false}>
+            <Text style={styles.sectionTitle}>Répartition globale</Text>
+            <Text style={styles.sectionDescription}>
+              Vue synthétique de la répartition des appels sur la période complète. Ce graphique permet de comprendre d'un coup d'oeil la proportion entre appels traités, manqués et hors horaires d'ouverture.
+            </Text>
+            <View style={styles.chartContainer}>
+              <Image src={charts.distribution} style={styles.chartImage} />
+            </View>
+          </View>
+        )}
+
+        {charts.dailyRate && (
+          <View style={styles.section} wrap={false}>
+            <Text style={styles.sectionTitle}>Taux de réponse journalier</Text>
+            <Text style={styles.sectionDescription}>
+              Évolution du taux de réponse jour par jour. Cette courbe permet d'identifier les jours à problème et d'observer les tendances d'amélioration ou de détérioration de la qualité de service au fil du temps.
+            </Text>
+            <View style={styles.chartContainer}>
+              <Image src={charts.dailyRate} style={styles.chartImage} />
             </View>
           </View>
         )}
@@ -591,12 +665,12 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
       {/* PAGE 6: DETAILS */}
       <Page size="A4" style={styles.page}>
         <BackgroundDecoration />
-        <PageHeader title="Détails Opérationnels" subtitle={periodStr} />
+        <PageHeader title="Détails opérationnels" subtitle={periodStr} />
 
         <View style={styles.row}>
           {/* TOP AGENTS */}
           <View style={{ flex: 1 }} wrap={false}>
-            <Text style={styles.sectionTitle}>Performance Agents</Text>
+            <Text style={styles.sectionTitle}>Performance agents</Text>
             <Text style={styles.sectionDescription}>
               Classement des agents par volume d'appels traités.
             </Text>
@@ -619,7 +693,7 @@ export const ReportDocument: React.FC<ReportDocumentProps> = ({ stats, config, d
 
           {/* TOP CALLERS */}
           <View style={{ flex: 1 }} wrap={false}>
-            <Text style={styles.sectionTitle}>Appelants Fréquents</Text>
+            <Text style={styles.sectionTitle}>Appelants fréquents</Text>
             <Text style={styles.sectionDescription}>
               Top 10 des numéros les plus actifs.
             </Text>

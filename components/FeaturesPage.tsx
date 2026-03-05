@@ -534,7 +534,7 @@ const FeatureDetail: React.FC<{ feature: Feature; onBack: () => void }> = ({ fea
 // MAIN COMPONENT
 // =============================================================================
 
-export const FeaturesPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
+export const FeaturesPage: React.FC<{ onBack: () => void; onOpenLegal?: () => void }> = ({ onBack, onOpenLegal }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedFeature, setSelectedFeature] = useState<Feature | null>(null);
@@ -697,13 +697,19 @@ export const FeaturesPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               Outil d'analyse de relevés d'appels OVH 100% gratuit et privé. 
               Importez vos CSV, visualisez vos statistiques, exportez vos rapports.
             </p>
-            <div className="flex flex-wrap justify-center gap-2 text-xs text-slate-400">
-              <span>#analyse-ovh</span>
-              <span>#statistiques-appels</span>
-              <span>#csv-ovh</span>
-              <span>#telephonie</span>
-              <span>#gratuit</span>
-              <span>#prive</span>
+            <div className="flex flex-wrap justify-center gap-4 text-xs text-slate-400">
+              <span>© {new Date().getFullYear()} OpenZyra</span>
+              <span>•</span>
+              <button 
+                onClick={onOpenLegal}
+                className="hover:text-[#1F4597] transition-colors underline"
+              >
+                Mentions légales (GNU GPL v3)
+              </button>
+              <span>•</span>
+              <a href="mailto:contact@openzyra.app" className="hover:text-[#1F4597] transition-colors">
+                Support
+              </a>
             </div>
           </div>
         </footer>

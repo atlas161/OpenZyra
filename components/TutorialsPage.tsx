@@ -67,6 +67,7 @@ interface TutorialsPageProps {
   onOpenFeatures?: () => void;
   onOpenAlternatives?: () => void;
   onOpenDocs?: () => void;
+  onOpenLegal?: () => void;
   tutorialSlug?: string | null;
 }
 
@@ -347,6 +348,7 @@ export const TutorialsPage: React.FC<TutorialsPageProps> = ({
   onOpenFeatures,
   onOpenAlternatives,
   onOpenDocs,
+  onOpenLegal,
   tutorialSlug 
 }) => {
   const [data, setData] = useState<TutorialsData | null>(null);
@@ -597,8 +599,19 @@ export const TutorialsPage: React.FC<TutorialsPageProps> = ({
         <div className="flex items-center justify-center gap-2 mb-2">
           <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-8 w-auto" />
         </div>
-        <p className="text-slate-500 text-sm">Documentation Open Source - v3.0</p>
-        <p className="text-slate-400 text-xs mt-1">100% Client-side • Vos données restent privées</p>
+        <p className="text-slate-500 text-sm mb-1">© {new Date().getFullYear()} OpenZyra - Licence GNU GPL v3.0</p>
+        <div className="flex items-center justify-center gap-4 text-xs text-slate-400 mt-2">
+          <button 
+            onClick={onOpenLegal}
+            className="hover:text-[#1F4597] transition-colors underline"
+          >
+            Mentions légales
+          </button>
+          <span>•</span>
+          <a href="mailto:contact@openzyra.app" className="hover:text-[#1F4597] transition-colors">
+            Support
+          </a>
+        </div>
       </footer>
     </div>
   );

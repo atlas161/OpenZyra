@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   FileSpreadsheet, 
   Shield, 
@@ -30,7 +31,10 @@ import {
   FileText,
   PieChart,
   ArrowUpRight,
-  Mail
+  Mail,
+  Monitor,
+  ChevronRight,
+  MousePointer
 } from 'lucide-react';
 
 // ==========================================
@@ -68,6 +72,7 @@ interface LandingPageProps {
   onOpenAlternatives?: () => void;
   onOpenFAQ?: () => void;
   onOpenContact?: () => void;
+  onOpenLegal?: () => void;
   error: string | null;
   isExiting?: boolean;
 }
@@ -362,6 +367,106 @@ const HowItWorksSection: React.FC = () => {
   );
 };
 
+// Tutoriel débutant - Comment télécharger le CSV OVH
+const BeginnerTutorialSection: React.FC = () => {
+  const steps = [
+    {
+      icon: Monitor,
+      title: "Connectez-vous à OVH",
+      desc: "Rendez-vous sur www.ovh.com et identifiez-vous.",
+      subSteps: ["Onglet Telecom", "Volet Téléphonie", "Sélectionnez votre groupe"]
+    },
+    {
+      icon: FileText,
+      title: "Téléchargez le CSV",
+      desc: "Tableau de bord → Je veux... → Voir mes relevés.",
+      subSteps: ["Sélectionnez le mois (N+1)", "3 petits points", "Listing de vos appels reçus au format CSV"]
+    },
+    {
+      icon: MousePointer,
+      title: "Importez dans OpenZyra",
+      desc: "Glissez-déposez votre fichier. L'analyse est instantanée.",
+      subSteps: ["Configuration auto", "Stats en temps réel", "Export PDF"]
+    }
+  ];
+
+  return (
+    <AnimatedSection className="mb-32">
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5087FF]/10 text-[#5087FF] text-sm font-medium mb-4">
+          <BookOpen size={16} />
+          Guide débutant
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+          Votre première analyse en 3 étapes
+        </h2>
+        <p className="text-slate-500 max-w-2xl mx-auto">
+          Pas besoin d'être expert. Suivez ces simples étapes pour obtenir vos statistiques.
+        </p>
+      </div>
+      
+      <div className="max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6">
+          {steps.map((step, i) => (
+            <div key={i} className="relative group">
+              {/* Step number badge */}
+              <div className="absolute -top-3 -left-3 w-10 h-10 rounded-full bg-[#5087FF] text-white text-lg font-bold flex items-center justify-center z-10 shadow-lg shadow-[#5087FF]/30">
+                {i + 1}
+              </div>
+              
+              {/* Connector line (hidden on mobile) */}
+              {i < steps.length - 1 && (
+                <div className="hidden md:block absolute top-8 left-full w-full h-0.5">
+                  <div className="w-full h-full bg-gradient-to-r from-[#5087FF]/30 to-transparent" />
+                </div>
+              )}
+              
+              {/* Card */}
+              <div className="h-full p-6 pt-8 rounded-3xl bg-white backdrop-blur border border-slate-200 hover:border-[#5087FF]/30 transition-all duration-300 group-hover:transform group-hover:-translate-y-1 shadow-lg shadow-slate-200/30">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#5087FF] to-[#1F4597] flex items-center justify-center mb-5 shadow-lg shadow-[#5087FF]/25 group-hover:scale-110 transition-transform duration-300">
+                  <step.icon size={28} className="text-white" />
+                </div>
+                
+                <h3 className="text-lg font-semibold text-slate-800 mb-3 group-hover:text-[#1F4597] transition-colors">
+                  {step.title}
+                </h3>
+                
+                <p className="text-sm text-slate-500 leading-relaxed mb-4">
+                  {step.desc}
+                </p>
+                
+                {/* Sub-steps */}
+                <div className="space-y-2 pt-4 border-t border-slate-100">
+                  {step.subSteps.map((subStep, j) => (
+                    <div key={j} className="flex items-center gap-2 text-xs text-slate-400">
+                      <ChevronRight size={14} className="text-[#5087FF]" />
+                      <span>{subStep}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Note importante */}
+        <div className="mt-8 p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3">
+          <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+            <Zap size={16} className="text-amber-500" />
+          </div>
+          <div>
+            <p className="text-sm text-amber-700 font-medium mb-1">Astuce importante</p>
+            <p className="text-sm text-amber-600">
+              Pour analyser le mois d'août, sélectionnez septembre dans les relevés OVH. 
+              Les relevés sont toujours disponibles au mois suivant (N+1).
+            </p>
+          </div>
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+};
+
 // Compatible avec
 const CompatibleWithSection: React.FC = () => {
   const compatibilities = [
@@ -547,12 +652,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onOpenAlternatives,
   onOpenFAQ,
   onOpenContact,
+  onOpenLegal,
   error, 
   isExiting 
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showDemoPopup, setShowDemoPopup] = useState(false);
 
   useEffect(() => {
     if (!isExiting) {
@@ -566,6 +673,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
+
+  // Block body scroll when demo popup is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    if (showDemoPopup) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = originalOverflow;
+    }
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [showDemoPopup]);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -607,10 +727,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 bg-[#5087FF] blur-xl opacity-50" />
-                <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="relative h-10 md:h-12 w-auto" />
-              </div>
+              <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-10 md:h-12 w-auto" />
             </div>
                         {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-1">
@@ -834,7 +951,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </button>
               
               <button
-                onClick={onOpenDocs}
+                onClick={() => setShowDemoPopup(true)}
                 className="px-8 py-4 rounded-2xl bg-slate-100 border border-slate-200 text-slate-700 font-medium hover:bg-slate-200 hover:border-slate-300 transition-all flex items-center justify-center gap-2"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -947,9 +1064,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* ==========================================
-              COMMENT ÇA MARCHE
+              TUTORIEL DÉBUTANT
           ========================================== */}
-          <HowItWorksSection />
+          <BeginnerTutorialSection />
 
           {/* ==========================================
               TÉMOIGNAGES
@@ -1036,20 +1153,67 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       <footer className="border-t border-slate-200 py-8">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <img src="/medias/OpenZyra.webp" alt="OpenZyra" className="h-6 w-auto opacity-60" />
-          <div className="text-sm text-slate-400 text-center">
-            © {new Date().getFullYear()} OpenZyra • 
-            <a 
-              href="https://github.com/atlas161/OpenZyra/blob/main/LICENSE" 
-              target="_blank" 
-              rel="noopener noreferrer"
+          <div className="flex items-center gap-4 text-sm text-slate-400">
+            <span>© {new Date().getFullYear()} OpenZyra</span>
+            <span>•</span>
+            <button 
+              onClick={onOpenLegal}
               className="hover:text-[#1F4597] transition-colors underline"
             >
-              GNU GPL v3
-            </a>
-            • 100% Client-side
+              Mentions légales (GNU GPL v3)
+            </button>
+            <span>•</span>
+            <button
+              onClick={onOpenContact}
+              className="hover:text-[#1F4597] transition-colors"
+            >
+              Support
+            </button>
           </div>
         </div>
       </footer>
+
+      {/* Demo Popup */}
+      {showDemoPopup && createPortal(
+        <div 
+          className="z-[9999] flex items-center justify-center p-4"
+          style={{ 
+            position: 'fixed', 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            bottom: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.4)',
+            backdropFilter: 'blur(4px)'
+          }}
+          onClick={() => setShowDemoPopup(false)}
+        >
+          <div 
+            className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center">
+                <Clock size={32} className="text-amber-500" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
+                Démo vidéo en préparation
+              </h3>
+              <p className="text-slate-500 mb-6">
+                Notre équipe est en train de réaliser une démo vidéo complète. 
+                Patientez encore un peu, elle sera bientôt disponible !
+              </p>
+              <button
+                onClick={() => setShowDemoPopup(false)}
+                className="w-full px-6 py-3 bg-[#1F4597] text-white rounded-xl font-medium hover:brightness-110 transition-all"
+              >
+                J'ai hâte de la voir !
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
 
       {/* Hidden file input */}
       <input 
