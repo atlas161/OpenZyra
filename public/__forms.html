@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Netlify Forms - OpenZyra</title>
+</head>
+<body>
+  <!-- 
+    Ce fichier est nécessaire pour que Netlify détecte le formulaire de contact.
+    Netlify parse les fichiers HTML au build pour trouver les formulaires avec data-netlify="true".
+    Le formulaire React étant dynamique, il faut cette version statique.
+  -->
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="subject" />
+    <textarea name="message"></textarea>
+    <input name="bot-field" />
+  </form>
+</body>
+</html>
