@@ -24,15 +24,13 @@
 // Upload CSV → parseCSV() → detectLines → ConfigModal → processSessions() → Stats
 // =============================================================================
 
-import React, { useState, useMemo, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Filter } from 'lucide-react';
-
-// Bibliothèques lourdes - chargées uniquement quand nécessaire
-const html2canvas = () => import('html2canvas').then(m => m.default);
-const pdfRenderer = () => import('@react-pdf/renderer').then(m => m.pdf);
-const JSZip = () => import('jszip').then(m => m.default);
-const saveAs = () => import('file-saver').then(m => m.saveAs);
+import html2canvas from 'html2canvas';
+import { pdf } from '@react-pdf/renderer';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 // Types
 import { RawRecord, SessionRecord, SortKey, SortDirection, Stats, ChartsData, FilterState, ProjectConfig, ProjectExport, LineConfig } from './types';
@@ -43,30 +41,28 @@ import { processSessions } from './utils/processing';
 import { formatDateTime, normalizePhoneNumber, formatDuration } from './utils/formatters';
 import { defaultSchedule } from './utils/schedule';
 
-// Composants CRITIQUES (chargés immédiatement - LCP)
+// Composants
 import { ConfigModal } from './components/ConfigModal';
 import { LandingPage } from './components/LandingPage';
 import { LegalPage } from './components/LegalPage';
+import { ReportDocument } from './components/pdf/ReportDocument';
 import { Header } from './components/Header';
+import { Sidebar } from './components/Sidebar';
 import { StatsCards } from './components/StatsCards';
+import { ChartsSection } from './components/ChartsSection';
 import { CallTable } from './components/CallTable';
+import { DocumentationPage } from './components/DocumentationPage';
+import { HelpPage } from './components/HelpPage';
 import { UploadModal } from './components/UploadModal';
 import { AnalysisLoader } from './components/AnalysisLoader';
 import { FilterBar } from './components/FilterBar';
+import { FeaturesPage } from './components/FeaturesPage';
+import { TutorialsPage } from './components/TutorialsPage';
+import { AlternativesPage } from './components/AlternativesPage';
+import { FAQPage } from './components/FAQPage';
+import { ContactPage } from './components/ContactPage';
+import { CallTraceModal } from './components/CallTraceModal';
 import { Breadcrumb } from './components/Breadcrumb';
-
-// Composants NON-CRITIQUES (lazy loaded - code splitting)
-const Sidebar = lazy(() => import('./components/Sidebar').then(m => ({ default: m.Sidebar })));
-const ChartsSection = lazy(() => import('./components/ChartsSection').then(m => ({ default: m.ChartsSection })));
-const DocumentationPage = lazy(() => import('./components/DocumentationPage').then(m => ({ default: m.DocumentationPage })));
-const HelpPage = lazy(() => import('./components/HelpPage').then(m => ({ default: m.HelpPage })));
-const FeaturesPage = lazy(() => import('./components/FeaturesPage').then(m => ({ default: m.FeaturesPage })));
-const TutorialsPage = lazy(() => import('./components/TutorialsPage').then(m => ({ default: m.TutorialsPage })));
-const AlternativesPage = lazy(() => import('./components/AlternativesPage').then(m => ({ default: m.AlternativesPage })));
-const FAQPage = lazy(() => import('./components/FAQPage').then(m => ({ default: m.FAQPage })));
-const ContactPage = lazy(() => import('./components/ContactPage').then(m => ({ default: m.ContactPage })));
-const CallTraceModal = lazy(() => import('./components/CallTraceModal').then(m => ({ default: m.CallTraceModal })));
-const ReportDocument = lazy(() => import('./components/pdf/ReportDocument').then(m => ({ default: m.ReportDocument })));
 
 // =============================================================================
 // ÉTAT GLOBAL DE L'APPLICATION
@@ -518,8 +514,7 @@ const App = () => {
       setError(null);
       
       try {
-        const JSZipClass = await JSZip();
-        const zip = new JSZipClass();
+        const zip = new JSZip();
         const zipContent = await zip.loadAsync(files[0]);
         
         const projectFile = zipContent.file("project.json");
@@ -937,8 +932,7 @@ const App = () => {
     setIsZipGenerating(true);
 
     try {
-      const JSZipClass = await JSZip();
-      const zip = new JSZipClass();
+      const zip = new JSZip();
       const dateStr = new Date().toISOString().slice(0,10);
       
       // 1. Configuration JSON
@@ -991,29 +985,25 @@ const App = () => {
         
         await new Promise(resolve => setTimeout(resolve, 300));
         
-        const h2c = await html2canvas();
-        const canvas = await h2c(hourlyChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
-        hourlyImg = canvas.toDataURL('image/png');
+        if (hourlyChartEl) {
+            const canvas = await html2canvas(hourlyChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
+            hourlyImg = canvas.toDataURL('image/png');
+        }
         if (dailyChartEl) {
-            const h2c = await html2canvas();
-            const canvas = await h2c(dailyChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
+            const canvas = await html2canvas(dailyChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
             dailyImg = canvas.toDataURL('image/png');
         }
         if (distributionChartEl) {
-            const h2c = await html2canvas();
-            const canvas = await h2c(distributionChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
+            const canvas = await html2canvas(distributionChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
             distributionImg = canvas.toDataURL('image/png');
         }
         if (dailyRateChartEl) {
-            const h2c = await html2canvas();
-            const canvas = await h2c(dailyRateChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
+            const canvas = await html2canvas(dailyRateChartEl, { scale: 2, logging: false, backgroundColor: '#ffffff' });
             dailyRateImg = canvas.toDataURL('image/png');
         }
         
-        const pdfFunc = await pdfRenderer();
-        const ReportDocumentComponent = await ReportDocument;
-        const pdfBlob = await pdfFunc(
-            <ReportDocumentComponent 
+        const pdfBlob = await pdf(
+            <ReportDocument 
                 stats={stats} 
                 config={projectConfig} 
                 dateRange={dateRange} 
@@ -1032,8 +1022,7 @@ const App = () => {
       
       // 4. Générer et télécharger le ZIP
       const blob = await zip.generateAsync({ type: "blob" });
-      const saveAsFunc = await saveAs();
-      saveAsFunc(blob, `OpenZyra_export_complet_${dateStr}.zip`);
+      saveAs(blob, `OpenZyra_export_complet_${dateStr}.zip`);
       
     } catch (err) {
       console.error("Erreur lors de l'export ZIP:", err);
@@ -1099,8 +1088,7 @@ const App = () => {
         await new Promise(resolve => setTimeout(resolve, 500));
 
         if (hourlyChartEl) {
-            const h2c = await html2canvas();
-            const canvas = await h2c(hourlyChartEl, { 
+            const canvas = await html2canvas(hourlyChartEl, { 
                 scale: 2,
                 logging: false,
                 backgroundColor: '#ffffff'
@@ -1109,8 +1097,7 @@ const App = () => {
         }
 
         if (dailyChartEl) {
-            const h2c = await html2canvas();
-            const canvas = await h2c(dailyChartEl, { 
+            const canvas = await html2canvas(dailyChartEl, { 
                 scale: 2,
                 logging: false,
                 backgroundColor: '#ffffff'
@@ -1119,8 +1106,7 @@ const App = () => {
         }
 
         if (distributionChartEl) {
-            const h2c = await html2canvas();
-            const canvas = await h2c(distributionChartEl, { 
+            const canvas = await html2canvas(distributionChartEl, { 
                 scale: 2,
                 logging: false,
                 backgroundColor: '#ffffff'
@@ -1129,8 +1115,7 @@ const App = () => {
         }
 
         if (dailyRateChartEl) {
-            const h2c = await html2canvas();
-            const canvas = await h2c(dailyRateChartEl, { 
+            const canvas = await html2canvas(dailyRateChartEl, { 
                 scale: 2,
                 logging: false,
                 backgroundColor: '#ffffff'
@@ -1139,10 +1124,8 @@ const App = () => {
         }
 
         // 3. Génération du document PDF avec le logo
-        const pdf = await pdfRenderer();
-        const ReportDocumentComponent = await ReportDocument;
         const blob = await pdf(
-            <ReportDocumentComponent 
+            <ReportDocument 
                 stats={stats} 
                 config={projectConfig} 
                 dateRange={dateRange} 
@@ -1152,8 +1135,7 @@ const App = () => {
             />
         ).toBlob();
 
-        const saveAsFunc = await saveAs();
-        saveAsFunc(blob, `rapport_OpenZyra_${new Date().toISOString().slice(0,10)}.pdf`);
+        saveAs(blob, `rapport_OpenZyra_${new Date().toISOString().slice(0,10)}.pdf`);
 
     } catch (err) {
         console.error("Erreur PDF:", err);
@@ -1182,136 +1164,122 @@ const App = () => {
   // RENDER: Page de Documentation (remplace toute l'app si active)
   if (showDocs) {
       return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5087FF]"></div></div>}>
-          <>
-            <div className="bg-slate-50 border-b border-slate-200">
-              <div className="max-w-7xl mx-auto px-4 py-3">
-                <Breadcrumb items={[
-                  { label: 'Documentation', onClick: undefined }
-                ]} />
-              </div>
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Documentation', onClick: undefined }
+              ]} />
             </div>
-            <HelpPage onBack={onBackToHome} />
-          </>
-        </Suspense>
+          </div>
+          <HelpPage onBack={onBackToHome} />
+        </>
       );
   }
 
   // RENDER: Page de Tutoriels
   if (showTutorials) {
       return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5087FF]"></div></div>}>
-          <>
-            <div className="bg-slate-50 border-b border-slate-200">
-              <div className="max-w-7xl mx-auto px-4 py-3">
-                <Breadcrumb items={[
-                  { label: 'Tutoriels', onClick: undefined }
-                ]} />
-              </div>
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Tutoriels', onClick: undefined }
+              ]} />
             </div>
-            <TutorialsPage 
-                onBack={onBackToHome} 
-                onOpenFAQ={onOpenFAQ}
-                onOpenFeatures={onOpenFeatures}
-                onOpenAlternatives={onOpenAlternatives}
-                onOpenDocs={onOpenDocs}
-                onOpenLegal={onOpenLegal}
-            />
-          </>
-        </Suspense>
+          </div>
+          <TutorialsPage 
+              onBack={onBackToHome} 
+              onOpenFAQ={onOpenFAQ}
+              onOpenFeatures={onOpenFeatures}
+              onOpenAlternatives={onOpenAlternatives}
+              onOpenDocs={onOpenDocs}
+              onOpenLegal={onOpenLegal}
+          />
+        </>
       );
   }
 
   // RENDER: Page de Fonctionnalités
   if (showFeatures) {
       return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5087FF]"></div></div>}>
-          <>
-            <div className="bg-slate-50 border-b border-slate-200">
-              <div className="max-w-7xl mx-auto px-4 py-3">
-                <Breadcrumb items={[
-                  { label: 'Fonctionnalités', onClick: undefined }
-                ]} />
-              </div>
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Fonctionnalités', onClick: undefined }
+              ]} />
             </div>
-            <FeaturesPage 
-                onBack={onBackToHome} 
-                onOpenLegal={onOpenLegal}
-            />
-          </>
-        </Suspense>
+          </div>
+          <FeaturesPage 
+              onBack={onBackToHome} 
+              onOpenLegal={onOpenLegal}
+          />
+        </>
       );
   }
 
   // RENDER: Page FAQ
   if (showFAQ) {
       return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5087FF]"></div></div>}>
-          <>
-            <div className="bg-slate-50 border-b border-slate-200">
-              <div className="max-w-7xl mx-auto px-4 py-3">
-                <Breadcrumb items={[
-                  { label: 'FAQ', onClick: undefined }
-                ]} />
-              </div>
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'FAQ', onClick: undefined }
+              ]} />
             </div>
-            <FAQPage onBack={onBackToHome} />
-          </>
-        </Suspense>
+          </div>
+          <FAQPage onBack={onBackToHome} />
+        </>
       );
   }
 
   // RENDER: Page Mentions Légales
   if (showLegal) {
       return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5087FF]"></div></div>}>
-          <>
-            <div className="bg-slate-50 border-b border-slate-200">
-              <div className="max-w-7xl mx-auto px-4 py-3">
-                <Breadcrumb items={[
-                  { label: 'Mentions Légales', onClick: undefined }
-                ]} />
-              </div>
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Mentions Légales', onClick: undefined }
+              ]} />
             </div>
-            <LegalPage onBack={onBackToHome} />
-          </>
-        </Suspense>
+          </div>
+          <LegalPage onBack={onBackToHome} />
+        </>
       );
   }
 
   // RENDER: Page Contact
   if (showContact) {
       return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5087FF]"></div></div>}>
-          <>
-            <div className="bg-slate-50 border-b border-slate-200">
-              <div className="max-w-7xl mx-auto px-4 py-3">
-                <Breadcrumb items={[
-                  { label: 'Contact', onClick: undefined }
-                ]} />
-              </div>
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Contact', onClick: undefined }
+              ]} />
             </div>
-            <ContactPage onBack={onBackToHome} />
-          </>
-        </Suspense>
+          </div>
+          <ContactPage onBack={onBackToHome} />
+        </>
       );
   }
 
   // RENDER: Page Alternatives
   if (showAlternatives) {
       return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5087FF]"></div></div>}>
-          <>
-            <div className="bg-slate-50 border-b border-slate-200">
-              <div className="max-w-7xl mx-auto px-4 py-3">
-                <Breadcrumb items={[
-                  { label: 'Alternatives', onClick: undefined }
-                ]} />
-              </div>
+        <>
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <Breadcrumb items={[
+                { label: 'Alternatives', onClick: undefined }
+              ]} />
             </div>
-            <AlternativesPage onBack={onBackToHome} />
-          </>
-        </Suspense>
+          </div>
+          <AlternativesPage onBack={onBackToHome} />
+        </>
       );
   }
 
@@ -1378,22 +1346,20 @@ const App = () => {
         />
 
         <div className="flex flex-1 overflow-hidden bg-gradient-to-br from-violet-50/40 via-slate-50 to-fuchsia-50/30">
-          <Suspense fallback={<div className="w-64 flex items-center justify-center bg-white/50"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#5087FF]"></div></div>}>
-            <Sidebar 
-              allRawRecordsCount={allRawRecords.length}
-              dateRange={dateRange}
-              setDateRange={setDateRange}
-              projectConfig={projectConfig}
-              setShowConfig={setShowConfig}
-              handleReset={handleReset}
-              isOpen={isSidebarOpen}
-              onClose={() => setIsSidebarOpen(false)}
-              minDate={minDate}
-              maxDate={maxDate}
-              isCollapsed={isSidebarCollapsed}
-              onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-            />
-          </Suspense>
+          <Sidebar 
+            allRawRecordsCount={allRawRecords.length}
+            dateRange={dateRange}
+            setDateRange={setDateRange}
+            projectConfig={projectConfig}
+            setShowConfig={setShowConfig}
+            handleReset={handleReset}
+            isOpen={isSidebarOpen}
+            onClose={() => setIsSidebarOpen(false)}
+            minDate={minDate}
+            maxDate={maxDate}
+            isCollapsed={isSidebarCollapsed}
+            onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+          />
 
           <main 
             className={`flex-1 bg-gradient-to-br from-violet-50/40 via-slate-50 to-fuchsia-50/30 p-4 md:p-6 min-h-full ${showConfig ? '' : 'overflow-y-auto'}`}
@@ -1416,38 +1382,34 @@ const App = () => {
                           {!projectConfig && <p className="text-sm text-red-500 mt-2">Veuillez configurer au moins une ligne du groupe.</p>}
                       </div>
                   ) : (
-                    <Suspense fallback={<div className="flex items-center justify-center py-12"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5087FF]"></div></div>}>
-                      <>
-                        <StatsCards stats={stats} />
-                        <ChartsSection charts={charts} filterStatus={filters.status} />
-                        <CallTable 
-                          filteredData={filteredData} 
-                          ITEMS_PER_PAGE={ITEMS_PER_PAGE} 
-                          currentPage={currentPage} 
-                          setCurrentPage={setCurrentPage} 
-                          sortConfig={sortConfig} 
-                          handleSort={handleSort}
-                          onCallClick={(call) => {
-                            setSelectedCall(call);
-                            setShowCallTrace(true);
-                          }}
-                        />
-                      </>
-                    </Suspense>
+                    <>
+                      <StatsCards stats={stats} />
+                      <ChartsSection charts={charts} filterStatus={filters.status} />
+                      <CallTable 
+                        filteredData={filteredData} 
+                        ITEMS_PER_PAGE={ITEMS_PER_PAGE} 
+                        currentPage={currentPage} 
+                        setCurrentPage={setCurrentPage} 
+                        sortConfig={sortConfig} 
+                        handleSort={handleSort}
+                        onCallClick={(call) => {
+                          setSelectedCall(call);
+                          setShowCallTrace(true);
+                        }}
+                      />
+                    </>
                   )}
               </div>
           </main>
         </div>
       </div>
 
-      <Suspense fallback={null}>
-        <CallTraceModal
-          call={selectedCall}
-          isOpen={showCallTrace}
-          onClose={() => setShowCallTrace(false)}
-          projectConfig={projectConfig}
-        />
-      </Suspense>
+      <CallTraceModal
+        call={selectedCall}
+        isOpen={showCallTrace}
+        onClose={() => setShowCallTrace(false)}
+        projectConfig={projectConfig}
+      />
 
       {showUploadModal && (
           <UploadModal 
