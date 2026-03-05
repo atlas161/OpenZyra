@@ -1,0 +1,75 @@
+{
+  "name": "OpenZyra - Analyse OVH",
+  "short_name": "OpenZyra",
+  "description": "Outil gratuit et open source d'analyse des relevés d'appels OVH. Statistiques détaillées, temps d'attente, appels manqués. 100% client-side.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#3B82F6",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/medias/favicon/favicon-96x96.webp",
+      "sizes": "96x96",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/medias/favicon/apple-touch-icon.webp",
+      "sizes": "180x180",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/medias/screenshots/desktop.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "OpenZyra - Tableau de bord d'analyse"
+    },
+    {
+      "src": "/medias/screenshots/mobile.webp",
+      "sizes": "750x1334",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "OpenZyra - Vue mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Documentation",
+      "short_name": "Docs",
+      "description": "Accéder à la documentation",
+      "url": "/#documentation",
+      "icons": [
+        {
+          "src": "/medias/icons/docs.webp",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Aide",
+      "short_name": "Aide",
+      "description": "Centre d'aide et FAQ",
+      "url": "/#aide",
+      "icons": [
+        {
+          "src": "/medias/icons/help.webp",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

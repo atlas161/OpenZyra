@@ -1,0 +1,324 @@
+{
+  "features": [
+    {
+      "id": "analyse-csv-ovh",
+      "slug": "analyse-csv-ovh",
+      "title": "Analyse de Relevés CSV OVH",
+      "shortDescription": "Importez et analysez automatiquement vos relevés d'appels OVH au format CSV",
+      "fullDescription": "OpenZyra lit directement vos fichiers CSV OVH et extrait automatiquement toutes les informations pertinentes : dates, durées, numéros, statuts d'appel. Plus besoin de manipuler des tableaux Excel complexes.",
+      "icon": "FileSpreadsheet",
+      "category": "import",
+      "tags": ["csv", "ovh", "import", "automatique"],
+      "benefits": [
+        "Import par simple glisser-déposer",
+        "Support des fichiers CSV et ZIP",
+        "Détection automatique des colonnes",
+        "Encodage UTF-8 automatique",
+        "Analyse instantanée sans upload serveur"
+      ],
+      "screenshot": null,
+      "details": {
+        "formats": ["CSV", "ZIP"],
+        "maxSize": "100MB",
+        "encoding": "UTF-8, ISO-8859-1",
+        "separator": "Point-virgule ou virgule"
+      },
+      "seo": {
+        "keywords": "analyse csv ovh, releves appels csv, importer ovh, telephonie ovh analyse",
+        "metaDescription": "Analysez vos relevés d'appels OVH en CSV avec OpenZyra. Import automatique, statistiques instantanées, 100% privé."
+      },
+      "order": 1
+    },
+    {
+      "id": "statistiques-temps-reel",
+      "slug": "statistiques-temps-reel",
+      "title": "Statistiques en Temps Réel",
+      "shortDescription": "Visualisez instantanément vos métriques clés avec des tableaux de bord interactifs",
+      "fullDescription": "Obtenez une vue d'ensemble complète de votre activité téléphonique en quelques secondes. OpenZyra calcule automatiquement toutes les statistiques essentielles pour évaluer la performance de votre groupe d'appel.",
+      "icon": "BarChart3",
+      "category": "analytics",
+      "tags": ["stats", "kpi", "metriques", "performance"],
+      "benefits": [
+        "Taux de réponse en temps réel",
+        "Temps d'attente moyen et maximum",
+        "Nombre total d'appels analysés",
+        "Distribution des statuts (Répondu/Manqué)",
+        "Durée moyenne des conversations"
+      ],
+      "screenshot": null,
+      "stats": [
+        { "label": "Taux de Réponse", "value": "94.2%", "icon": "Phone" },
+        { "label": "Temps d'Attente Moyen", "value": "12.5s", "icon": "Clock" },
+        { "label": "Appels Analysés", "value": "15,420", "icon": "BarChart3" }
+      ],
+      "seo": {
+        "keywords": "statistiques appels, metriques telephonie, taux reponse, analyse performance",
+        "metaDescription": "Tableaux de bord de statistiques téléphoniques en temps réel. Taux de réponse, temps d'attente, performance groupe d'appel."
+      },
+      "order": 2
+    },
+    {
+      "id": "filtres-avances",
+      "slug": "filtres-avances",
+      "title": "Filtres Avancés",
+      "shortDescription": "Filtrez vos appels par date, heure, numéro, statut et lignes sollicitées",
+      "fullDescription": "Segmentez précisément vos données pour analyser des périodes spécifiques, identifier les appels d'un numéro particulier, ou isoler les appels manqués sur une ligne donnée. La combinaison de filtres permet une analyse granulaire.",
+      "icon": "Filter",
+      "category": "analytics",
+      "tags": ["filtres", "recherche", "segmentation", "analyse"],
+      "benefits": [
+        "Filtre par plage de dates personnalisable",
+        "Filtre par tranche horaire",
+        "Recherche par numéro appelant",
+        "Filtre par lignes sollicitées",
+        "Filtrage par statut (Répondu/Manqué/Total)"
+      ],
+      "screenshot": null,
+      "filters": [
+        { "name": "Date", "type": "range", "example": "01/01/2026 - 31/01/2026" },
+        { "name": "Heure", "type": "range", "example": "08:00 - 18:00" },
+        { "name": "Appelant", "type": "search", "example": "+33 1 23 45 67 89" },
+        { "name": "Lignes", "type": "multiselect", "example": "SIP 1, SIP 2, NDI" }
+      ],
+      "seo": {
+        "keywords": "filtres appels, recherche telephonique, segmentation donnees, analyse ciblee",
+        "metaDescription": "Filtres avancés pour analyser vos appels par date, heure, numéro et statut. Segmentation précise de vos données téléphoniques."
+      },
+      "order": 3
+    },
+    {
+      "id": "graphiques-interactifs",
+      "slug": "graphiques-interactifs",
+      "title": "Graphiques Interactifs",
+      "shortDescription": "Visualisez vos données avec des graphiques horaires et journaliers détaillés",
+      "fullDescription": "Comprenez vos patterns d'appel grâce à des visualisations claires. Identifiez les pics d'activité, les plages horaires calmes, et les tendances sur plusieurs mois pour optimiser votre staffing.",
+      "icon": "PieChart",
+      "category": "analytics",
+      "tags": ["graphiques", "charts", "visualisation", "tendances"],
+      "benefits": [
+        "Distribution horaire des appels (24h)",
+        "Répartition journalière sur la période",
+        "Identification des pics d'activité",
+        "Visualisation des appels manqués vs répondus",
+        "Graphiques responsive et interactifs"
+      ],
+      "screenshot": null,
+      "chartTypes": [
+        { "name": "Distribution Horaire", "type": "bar", "description": "Appels par heure sur 24h" },
+        { "name": "Évolution Journalière", "type": "line", "description": "Tendance sur la période sélectionnée" }
+      ],
+      "seo": {
+        "keywords": "graphiques appels, visualisation telephonie, distribution horaire, tendances appels",
+        "metaDescription": "Graphiques interactifs pour visualiser vos statistiques d'appels. Distribution horaire, évolution journalière, pics d'activité."
+      },
+      "order": 4
+    },
+    {
+      "id": "trace-appel-detaillee",
+      "slug": "trace-appel-detaillee",
+      "title": "Tracé d'Appel Détaillé",
+      "shortDescription": "Visualisez le parcours complet de chaque appel avec temps d'attente et transferts",
+      "fullDescription": "Cliquez sur n'importe quel appel pour voir sa trace complète : quand il a été reçu, sur quelles lignes, combien de temps en attente, qui a répondu, et la durée totale. Comprenez précisément ce qui s'est passé.",
+      "icon": "Route",
+      "category": "analytics",
+      "tags": ["trace", "details", "parcours", "appel"],
+      "benefits": [
+        "Vue chronologique de l'appel",
+        "Temps d'attente par étape",
+        "Lignes sollicitées visuellement",
+        "Identification du répondeur",
+        "Durée de conversation finale"
+      ],
+      "screenshot": null,
+      "callSteps": [
+        { "step": 1, "label": "Appel entrant", "icon": "PhoneIncoming" },
+        { "step": 2, "label": "Mise en attente", "icon": "Pause" },
+        { "step": 3, "label": "Distribution lignes", "icon": "Share2" },
+        { "step": 4, "label": "Réponse/Abandon", "icon": "Phone" }
+      ],
+      "seo": {
+        "keywords": "trace appel, parcours appel, detail appel, analyse appel par appel",
+        "metaDescription": "Visualisez le tracé détaillé de chaque appel. Temps d'attente, lignes sollicitées, transferts, durée de conversation."
+      },
+      "order": 5
+    },
+    {
+      "id": "export-multiformats",
+      "slug": "export-multiformats",
+      "title": "Export Multi-Formats",
+      "shortDescription": "Exportez vos analyses en PDF, CSV, JSON ou ZIP complet",
+      "fullDescription": "Partagez vos rapports avec votre équipe ou archivez-les. OpenZyra génère des rapports professionnels incluant statistiques, graphiques et données brutes dans les formats standards du marché.",
+      "icon": "Download",
+      "category": "export",
+      "tags": ["export", "pdf", "csv", "rapport", "partage"],
+      "benefits": [
+        "Export PDF avec graphiques et statistiques",
+        "Export CSV des données filtrées",
+        "Export ZIP complet (PDF + CSV + Config)",
+        "Export JSON de la configuration",
+        "Rapports professionnels prêts à partager"
+      ],
+      "screenshot": null,
+      "exportFormats": [
+        { "format": "PDF", "content": "Stats, graphiques, tableau récapitulatif", "useCase": "Présentation management" },
+        { "format": "CSV", "content": "Données brutes filtrées", "useCase": "Analyse Excel externe" },
+        { "format": "ZIP", "content": "PDF + CSV + Fichier de config", "useCase": "Archive complète" },
+        { "format": "JSON", "content": "Configuration lignes et horaires", "useCase": "Sauvegarde réutilisable" }
+      ],
+      "seo": {
+        "keywords": "export rapports, pdf telephonie, export csv, partage statistiques",
+        "metaDescription": "Exportez vos analyses téléphoniques en PDF, CSV, ZIP ou JSON. Rapports professionnels avec statistiques et graphiques."
+      },
+      "order": 6
+    },
+    {
+      "id": "configuration-lignes",
+      "slug": "configuration-lignes",
+      "title": "Configuration des Lignes",
+      "shortDescription": "Configurez vos lignes NDI et SIP avec leurs horaires d'ouverture",
+      "fullDescription": "Définissez précisément votre configuration téléphonique : quelles lignes sont des NDI (numéros principaux), quelles lignes sont des SIP (postes agents), et leurs horaires d'ouverture. OpenZyra adapte l'analyse à votre setup.",
+      "icon": "Settings",
+      "category": "configuration",
+      "tags": ["configuration", "ndi", "sip", "lignes", "setup"],
+      "benefits": [
+        "Détection automatique des lignes depuis CSV",
+        "Configuration NDI vs SIP",
+        "Personnalisation des noms de lignes",
+        "Définition des horaires d'ouverture",
+        "Import/export de configuration"
+      ],
+      "screenshot": null,
+      "configOptions": [
+        { "type": "NDI", "description": "Numéro de téléphone principal (ex: 01 23 45 67 89)", "color": "blue" },
+        { "type": "SIP", "description": "Ligne interne agent (ex: 100, 101, 102)", "color": "green" },
+        { "type": "Horaires", "description": "Heures d'ouverture par jour", "color": "orange" }
+      ],
+      "seo": {
+        "keywords": "configuration ovh, lignes sip, lignes ndi, parametres groupe appel",
+        "metaDescription": "Configurez vos lignes OVH (NDI/SIP) et horaires dans OpenZyra. Import automatique depuis fichier OVH ou manuel."
+      },
+      "order": 7
+    },
+    {
+      "id": "sauvegarde-projets",
+      "slug": "sauvegarde-projets",
+      "title": "Sauvegarde de Projets",
+      "shortDescription": "Sauvegardez et rechargez vos analyses complètes avec un fichier ZIP",
+      "fullDescription": "Ne perdez jamais votre travail d'analyse. Exportez un projet complet contenant vos données brutes, votre configuration et vos filtres dans un fichier ZIP. Rechargez-le plus tard pour reprendre l'analyse exactement où vous l'avez laissée.",
+      "icon": "Save",
+      "category": "export",
+      "tags": ["sauvegarde", "projet", "zip", "archive"],
+      "benefits": [
+        "Sauvegarde complète (données + config)",
+        "Rechargement ultérieur instantané",
+        "Partage d'analyses avec collègues",
+        "Archivage mensuel/annuel",
+        "Restauration exacte de l'état"
+      ],
+      "screenshot": null,
+      "projectContents": [
+        "Données brutes des CSV importés",
+        "Configuration des lignes et horaires",
+        "Historique complet des appels",
+        "Métadonnées de l'analyse"
+      ],
+      "seo": {
+        "keywords": "sauvegarde analyse, projet OpenZyra, archivage telephonie, partage analyse",
+        "metaDescription": "Sauvegardez vos analyses complètes dans des fichiers ZIP. Données, configuration, filtres - tout est conservé pour rechargement futur."
+      },
+      "order": 8
+    },
+    {
+      "id": "multi-fichiers",
+      "slug": "multi-fichiers",
+      "title": "Support Multi-Fichiers",
+      "shortDescription": "Importez plusieurs fichiers CSV simultanément pour une analyse consolidée",
+      "fullDescription": "Analysez des périodes étendues en important plusieurs mois de relevés en une seule fois. OpenZyra consolide automatiquement les données et détecte les groupes téléphoniques présents dans les différents fichiers.",
+      "icon": "Layers",
+      "category": "import",
+      "tags": ["multi-fichiers", "consolidation", "import multiple", "aggregation"],
+      "benefits": [
+        "Import simultané de plusieurs CSV",
+        "Détection automatique des groupes",
+        "Consolidation chronologique",
+        "Analyse sur plusieurs mois",
+        "Gestion des doublons"
+      ],
+      "screenshot": null,
+      "supportedScenarios": [
+        { "scenario": "Plusieurs mois", "example": "janvier.csv + février.csv + mars.csv" },
+        { "scenario": "Plusieurs groupes", "example": "groupe1.csv + groupe2.csv" },
+        { "scenario": "Mix CSV/JSON", "example": "data.csv + config.json (OVH)" }
+      ],
+      "seo": {
+        "keywords": "import multiple csv, consolidation donnees, analyse multi mois, plusieurs fichiers",
+        "metaDescription": "Importez plusieurs fichiers CSV simultanément dans OpenZyra. Consolidation automatique pour analyse sur de longues périodes."
+      },
+      "order": 9
+    },
+    {
+      "id": "100-prive",
+      "slug": "100-prive",
+      "title": "100% Privé & Client-Side",
+      "shortDescription": "Vos données ne quittent jamais votre navigateur, aucun serveur externe",
+      "fullDescription": "Contrairement à la plupart des outils d'analyse, OpenZyra fonctionne entièrement dans votre navigateur. Vos fichiers CSV contenant des données sensibles (numéros de téléphone, historique d'appels) ne sont jamais uploadés sur un serveur. Confidentialité totale garantie.",
+      "icon": "Shield",
+      "category": "security",
+      "tags": ["confidentialite", "securite", "client-side", "prive"],
+      "benefits": [
+        "Aucun upload de données",
+        "Traitement local dans le navigateur",
+        "Aucune base de données externe",
+        "Pas de compte requis",
+        "Conformité RGPD naturelle"
+      ],
+      "screenshot": null,
+      "securityFeatures": [
+        { "feature": "Traitement Local", "description": "Tout se passe dans votre navigateur" },
+        { "feature": "Pas de Cookies", "description": "Aucun tracking ni publicité" },
+        { "feature": "Open Source", "description": "Code transparent et vérifiable" },
+        { "feature": "Mémoire volatile", "description": "Données effacées en fermant l'onglet" }
+      ],
+      "seo": {
+        "keywords": "confidentialite donnees, analyse privee, client side, securite telephonie, rgpd",
+        "metaDescription": "Analyse 100% privée de vos relevés d'appels. Vos données ne quittent jamais votre navigateur. Aucun serveur, aucun upload, confidentialité totale."
+      },
+      "order": 10
+    },
+    {
+      "id": "tableau-appels",
+      "slug": "tableau-appels",
+      "title": "Tableau d'Appels Interactif",
+      "shortDescription": "Consultez votre historique d'appels avec tri, pagination et filtres",
+      "fullDescription": "Parcourez votre historique d'appels complet dans un tableau performant. Triez par date, durée ou statut. Naviguez avec la pagination. Cliquez sur un appel pour voir sa trace détaillée. Exportez les résultats filtrés.",
+      "icon": "Table",
+      "category": "analytics",
+      "tags": ["tableau", "historique", "liste", "consultation"],
+      "benefits": [
+        "Tri par colonne (date, durée, statut)",
+        "Pagination pour grandes volumétries",
+        "Recherche instantanée",
+        "Clic pour détail d'appel",
+        "Export des résultats filtrés"
+      ],
+      "screenshot": null,
+      "tableFeatures": [
+        { "feature": "Tri", "columns": ["Date/Heure", "Appelant", "Durée", "Statut"] },
+        { "feature": "Pagination", "itemsPerPage": "20, 50, 100 lignes" },
+        { "feature": "Filtres", "options": ["Date", "Heure", "Numéro", "Statut"] }
+      ],
+      "seo": {
+        "keywords": "tableau appels, historique telephonique, liste appels, consultation releves",
+        "metaDescription": "Tableau interactif de votre historique d'appels. Tri, pagination, filtres, et accès détaillé à chaque appel."
+      },
+      "order": 11
+    }
+  ],
+  "categories": [
+    { "id": "import", "name": "Import & Données", "icon": "Upload", "description": "Fonctionnalités d'import et gestion des fichiers" },
+    { "id": "analytics", "name": "Analyse & Statistiques", "icon": "BarChart2", "description": "Visualisation et analyse des données" },
+    { "id": "export", "name": "Export & Partage", "icon": "Download", "description": "Export des rapports et sauvegarde" },
+    { "id": "configuration", "name": "Configuration", "icon": "Sliders", "description": "Paramétrage des lignes et options" },
+    { "id": "security", "name": "Confidentialité", "icon": "Lock", "description": "Sécurité et protection des données" }
+  ]
+}

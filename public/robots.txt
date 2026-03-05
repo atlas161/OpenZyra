@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://semaphors.netlify.app/sitemap.xml
+
+# Interdire l'indexation des fichiers sensibles
+Disallow: /*.tsx$
+Disallow: /*.ts$
+Disallow: /server/

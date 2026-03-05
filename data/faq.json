@@ -1,0 +1,265 @@
+{
+  "introduction": {
+    "title": "FAQ - Questions Fréquentes",
+    "subtitle": "Tout savoir sur l'analyse de vos appels OVH avec OpenZyra",
+    "description": "Trouvez les réponses à toutes vos questions concernant l'analyse de relevés d'appels OVH, la confidentialité, les fonctionnalités et l'utilisation de OpenZyra."
+  },
+
+  "categories": [
+    {
+      "id": "general",
+      "name": "Général",
+      "icon": "HelpCircle",
+      "description": "Questions générales sur OpenZyra"
+    },
+    {
+      "id": "utilisation",
+      "name": "Utilisation",
+      "icon": "Zap",
+      "description": "Comment utiliser l'outil"
+    },
+    {
+      "id": "donnees",
+      "name": "Données & Confidentialité",
+      "icon": "Shield",
+      "description": "Sécurité et traitement des données"
+    },
+    {
+      "id": "ovh",
+      "name": "OVH & Téléphonie",
+      "icon": "Phone",
+      "description": "Questions spécifiques OVH"
+    },
+    {
+      "id": "technique",
+      "name": "Technique",
+      "icon": "FileText",
+      "description": "Aspects techniques et CSV"
+    },
+    {
+      "id": "export",
+      "name": "Export & Partage",
+      "icon": "Download",
+      "description": "Export des rapports"
+    }
+  ],
+
+  "faqs": [
+    {
+      "id": "qu-est-ce-que-OpenZyra",
+      "category": "general",
+      "question": "Qu'est-ce que OpenZyra ?",
+      "answer": "OpenZyra est un outil d'analyse gratuit et open source pour les relevés d'appels téléphoniques OVH. Il permet d'importer des fichiers CSV de relevés d'appels et d'obtenir instantanément des statistiques détaillées : taux de réponse, temps d'attente, appels manqués, distribution horaire, et bien plus. Contrairement aux solutions payantes, OpenZyra fonctionne entièrement dans votre navigateur sans jamais envoyer vos données sur un serveur.",
+      "keywords": ["qu'est-ce que OpenZyra", "outil analyse ovh", "relevés appels"]
+    },
+    {
+      "id": "OpenZyra-gratuit",
+      "category": "general",
+      "question": "OpenZyra est-il vraiment gratuit ?",
+      "answer": "Oui, OpenZyra est 100% gratuit et le restera. Il s'agit d'un projet open source sans abonnement, sans limitation de fonctionnalités et sans frais cachés. Vous pouvez l'utiliser autant que vous le souhaitez pour analyser vos relevés d'appels sans payer un centime.",
+      "keywords": ["OpenZyra gratuit", "prix OpenZyra", "outil analyse gratuit"]
+    },
+    {
+      "id": "pourquoi-creer-OpenZyra",
+      "category": "general",
+      "question": "Pourquoi OpenZyra a-t-il été créé ?",
+      "answer": "OpenZyra a été créé pour répondre à un besoin simple : obtenir des statistiques détaillées sur les appels téléphoniques OVH sans passer par des solutions complexes ou payantes. Les outils existants étaient soit trop chers (solutions SaaS à 30-200€/mois), soit trop complexes à configurer (Excel, Power BI). OpenZyra offre une solution simple, rapide et gratuite.",
+      "keywords": ["pourquoi OpenZyra", "besoin analyse appels", "alternative payante"]
+    },
+    {
+      "id": "open-source",
+      "category": "general",
+      "question": "Que signifie 'Open Source' ?",
+      "answer": "Open Source signifie que le code source de OpenZyra est public et accessible à tous sur GitHub. Vous pouvez consulter le code, le vérifier, le modifier ou même contribuer au projet. Cela garantit la transparence : vous savez exactement ce que fait l'outil avec vos données (spoiler : il ne fait rien, tout reste dans votre navigateur !).",
+      "keywords": ["OpenZyra open source", "code source", "github"]
+    },
+    {
+      "id": "qui-utilise-OpenZyra",
+      "category": "general",
+      "question": "Qui utilise OpenZyra ?",
+      "answer": "OpenZyra est utilisé par des PME, des télésecrétariats, des centres d'appel, des boutiques en ligne, et toute entreprise utilisant un groupe d'appel OVH. Les utilisateurs typiques sont : responsables de relation client, managers d'équipe, propriétaires de petites entreprises, et administrateurs système souhaitant analyser la performance téléphonique.",
+      "keywords": ["qui utilise OpenZyra", "pour qui OpenZyra", "utilisateurs"]
+    },
+    {
+      "id": "comment-commencer",
+      "category": "utilisation",
+      "question": "Comment commencer avec OpenZyra ?",
+      "answer": "C'est très simple : 1) Connectez-vous à votre espace client OVH et téléchargez vos relevés d'appels en format CSV. 2) Rendez-vous sur OpenZyra et glissez-déposez vos fichiers CSV. 3) Configurez vos lignes NDI/SIP si nécessaire. 4) Consultez vos statistiques instantanément ! Aucune inscription, aucune installation, ça marche immédiatement.",
+      "keywords": ["comment utiliser OpenZyra", "démarrer OpenZyra", "tutoriel"]
+    },
+    {
+      "id": "pas-de-compte",
+      "category": "utilisation",
+      "question": "Dois-je créer un compte pour utiliser OpenZyra ?",
+      "answer": "Non, absolument pas ! OpenZyra ne nécessite aucune inscription, aucun email, aucun mot de passe. Vous ouvrez simplement le site, importez vos fichiers et commencez l'analyse immédiatement. C'est l'un des avantages de notre approche 100% client-side : pas besoin de compte pour traiter des données localement.",
+      "keywords": ["compte OpenZyra", "inscription", "sans compte"]
+    },
+    {
+      "id": "fonctionne-sur-mobile",
+      "category": "utilisation",
+      "question": "Est-ce que ça fonctionne sur mobile ?",
+      "answer": "Oui, OpenZyra fonctionne sur tous les appareils avec un navigateur moderne (Chrome, Firefox, Safari, Edge). Cependant, l'expérience est optimale sur ordinateur de bureau ou tablette en raison de la taille des tableaux et graphiques. Vous pouvez importer des fichiers depuis votre téléphone mais il est recommandé d'utiliser un écran plus grand pour l'analyse.",
+      "keywords": ["OpenZyra mobile", "smartphone", "tablette"]
+    },
+    {
+      "id": "combien-de-fichiers",
+      "category": "utilisation",
+      "question": "Combien de fichiers puis-je analyser ?",
+      "answer": "Vous pouvez analyser autant de fichiers que vous le souhaitez simultanément. Il n'y a pas de limite stricte, mais pour des raisons de performance nous recommandons d'importer moins de 50 fichiers à la fois. Vous pouvez aussi importer des fichiers ZIP contenant plusieurs mois de données. La seule limite technique est la mémoire de votre navigateur (généralement plusieurs centaines de MB).",
+      "keywords": ["limite fichiers", "combien fichiers", "import multiple"]
+    },
+    {
+      "id": "taille-maximale",
+      "category": "utilisation",
+      "question": "Quelle est la taille maximale des fichiers ?",
+      "answer": "Chaque fichier CSV peut faire jusqu'à 100MB, ce qui représente environ plusieurs années d'appels pour une PME typique. Si vos fichiers sont plus gros, vous pouvez les découper en périodes plus courtes ou les zipper. OpenZyra accepte aussi les fichiers ZIP contenant plusieurs CSV.",
+      "keywords": ["taille fichier", "limite taille", "csv gros fichier"]
+    },
+    {
+      "id": "donnees-securisees",
+      "category": "donnees",
+      "question": "Mes données sont-elles sécurisées ?",
+      "answer": "Absolument. OpenZyra utilise une technologie appelée 'client-side processing' : vos fichiers CSV sont analysés directement dans votre navigateur web sur votre ordinateur. Ils ne sont JAMAIS envoyés sur un serveur externe. Même nous, les créateurs de OpenZyra, n'avons aucun accès à vos données. Vos numéros de téléphone, historique d'appels et statistiques restent strictement confidentiels.",
+      "keywords": ["données sécurisées", "confidentialité", "sécurité appels"]
+    },
+    {
+      "id": "stockage-donnees",
+      "category": "donnees",
+      "question": "Où sont stockées mes données ?",
+      "answer": "Vos données ne sont stockées nulle part ! Elles existent uniquement temporairement dans la mémoire de votre navigateur pendant que vous utilisez l'outil. Dès que vous fermez l'onglet ou rechargez la page, les données sont effacées. C'est comme faire un calcul sur une calculatrice : une fois éteinte, plus rien ne reste.",
+      "keywords": ["stockage données", "où données", "local navigateur"]
+    },
+    {
+      "id": "rgpd-conformite",
+      "category": "donnees",
+      "question": "OpenZyra est-il conforme RGPD ?",
+      "answer": "Oui, et de manière naturelle ! Le RGPD impose des règles strictes sur le stockage et le traitement des données personnelles. Comme OpenZyra ne stocke aucune donnée (tout reste dans votre navigateur), il est intrinsèquement conforme. Nous ne collectons pas vos emails, n'avons pas de base de données utilisateurs, et n'utilisons pas de cookies de tracking. Vous gardez un contrôle total sur vos données.",
+      "keywords": ["rgpd", "conformité", "gdpr", "protection données"]
+    },
+    {
+      "id": "donnees-tierces",
+      "category": "donnees",
+      "question": "Mes données sont-elles partagées avec des tiers ?",
+      "answer": "Non, jamais. Vos fichiers CSV contiennent des informations sensibles (numéros de téléphone, durées d'appel, etc.). Ces données ne quittent jamais votre ordinateur. Nous ne partageons rien avec Google, Facebook, ou tout autre service. Pas de tracking, pas de publicité ciblée, pas d'analytics externes. Votre vie privée est totalement préservée.",
+      "keywords": ["partage données", "tiers", "vendre données"]
+    },
+    {
+      "id": "cookies",
+      "category": "donnees",
+      "question": "Utilisez-vous des cookies ?",
+      "answer": "OpenZyra n'utilise aucun cookie de tracking ou de publicité. Les seuls éléments stockés localement sont vos préférences d'affichage (si vous réduisez la sidebar par exemple). Ces données restent sur votre ordinateur et ne sont pas transmises. C'est une expérience web 'zero-tracking'.",
+      "keywords": ["cookies", "tracking", "privacy"]
+    },
+    {
+      "id": "compatible-ovh",
+      "category": "ovh",
+      "question": "OpenZyra fonctionne-t-il avec tous les forfaits OVH ?",
+      "answer": "Oui, OpenZyra fonctionne avec tous les types de lignes OVH : VoIP (SIP), numéros fixes (NDI), lignes SIP individuelles, groupes d'appel (GA), et parcs téléphoniques. Tant que vous pouvez exporter un fichier CSV de vos appels depuis l'espace client OVH, OpenZyra peut l'analyser. Cela inclut les forfaits Office, Entreprise, et même les anciennes offres.",
+      "keywords": ["compatible ovh", "forfaits ovh", "lignes sip"]
+    },
+    {
+      "id": "telecharger-csv-ovh",
+      "category": "ovh",
+      "question": "Comment télécharger mes relevés CSV depuis OVH ?",
+      "answer": "Pour télécharger vos relevés : 1) Connectez-vous à l'espace client OVH (www.ovh.com/manager). 2) Allez dans 'Téléphonie' puis sélectionnez votre groupe ou ligne. 3) Cliquez sur 'Consommation' ou 'Relevés d'appels'. 4) Sélectionnez la période souhaitée. 5) Cliquez sur 'Télécharger' et choisissez le format CSV. Vous pouvez aussi automatiser via l'API OVH si vous avez des compétences techniques.",
+      "keywords": ["télécharger csv ovh", "relevés appels ovh", "export ovh"]
+    },
+    {
+      "id": "difference-ndi-sip",
+      "category": "ovh",
+      "question": "Quelle est la différence entre NDI et SIP ?",
+      "answer": "NDI (Numéro Direct International) est votre numéro de téléphone principal affiché publiquement (ex: 01 23 45 67 89). SIP (Session Initiation Protocol) désigne les lignes internes de vos postes téléphoniques ou agents (ex: 101, 102, 103). Dans un groupe d'appel, les appels arrivent sur le NDI puis sont distribués aux lignes SIP disponibles. OpenZyra détecte automatiquement ces configurations.",
+      "keywords": ["ndi sip différence", "numéro direct", "ligne sip ovh"]
+    },
+    {
+      "id": "groupe-appel-ovh",
+      "category": "ovh",
+      "question": "Qu'est-ce qu'un groupe d'appel OVH (GA) ?",
+      "answer": "Un groupe d'appel (GA ou 'groupe d'appel') est une configuration où plusieurs lignes SIP partagent un même numéro (NDI). Quand quelqu'un appelle ce numéro, tous les postes du groupe sonnent simultanément ou selon des règles de distribution. C'est idéal pour les PME : un seul numéro public mais plusieurs personnes peuvent répondre. OpenZyra analyse parfaitement ces configurations en identifiant quelle ligne SIP a répondu à chaque appel.",
+      "keywords": ["groupe appel ovh", "ga ovh", "distribution appels"]
+    },
+    {
+      "id": "autres-operateurs",
+      "category": "ovh",
+      "question": "Est-ce que ça fonctionne avec d'autres opérateurs ?",
+      "answer": "Actuellement, OpenZyra est optimisé pour les fichiers CSV OVH. Si vous avez des relevés d'autres opérateurs (Free, Orange, SFR), le format CSV est probablement différent. Nous travaillons à supporter plus de formats. En attendant, vous pouvez essayer d'importer votre fichier : si les colonnes essentielles (date, durée, numéro) sont présentes, OpenZyra tentera de les reconnaître automatiquement.",
+      "keywords": ["autres opérateurs", "free orange sfr", "compatible"]
+    },
+    {
+      "id": "format-csv",
+      "category": "technique",
+      "question": "Quel format CSV est supporté ?",
+      "answer": "OpenZyra supporte les fichiers CSV OVH standards avec séparateur point-virgule (;) ou virgule (,). L'encodage est automatiquement détecté (UTF-8 ou ISO-8859-1). Les colonnes requises sont : date/heure, numéro appelant, numéro appelé, durée, et statut. OpenZyra détecte automatiquement la structure de vos fichiers OVH sans configuration manuelle.",
+      "keywords": ["format csv", "csv ovh", "séparateur csv"]
+    },
+    {
+      "id": "erreur-import",
+      "category": "technique",
+      "question": "Que faire si mon fichier ne s'importe pas ?",
+      "answer": "Si vous rencontrez une erreur d'import : 1) Vérifiez que c'est bien un fichier CSV (pas Excel .xlsx). 2) Assurez-vous qu'il vient bien d'OVH (pas d'autres opérateurs). 3) Vérifiez l'encodage (essayez de l'ouvrir dans un éditeur de texte). 4) Si le fichier est très gros (>100MB), essayez de le découper. 5) Vérifiez qu'il n'est pas corrompu (lignes vides, caractères bizarres). Contactez-nous sur GitHub si le problème persiste.",
+      "keywords": ["erreur import", "fichier ne marche pas", "problème csv"]
+    },
+    {
+      "id": "caracteres-speciaux",
+      "category": "technique",
+      "question": "Les caractères spéciaux sont-ils supportés ?",
+      "answer": "Oui, OpenZyra gère parfaitement les caractères spéciaux, accents, et encodages variés. Les fichiers OVH sont généralement en ISO-8859-1 (Latin-1) ou UTF-8. L'outil détecte automatiquement l'encodage et convertit correctement les caractères. Mêmes les noms d'agents avec accents ou caractères spéciaux seront affichés correctement.",
+      "keywords": ["accents", "caractères spéciaux", "encodage"]
+    },
+    {
+      "id": "horaires-ouverture",
+      "category": "technique",
+      "question": "Comment configurer mes horaires d'ouverture ?",
+      "answer": "Lors de l'import, OpenZyra vous propose de configurer vos horaires d'ouverture. Par défaut, c'est 9h-18h du lundi au vendredi, mais vous pouvez personnaliser : 1) Définir des plages horaires par jour. 2) Définir des jours de fermeture (week-end, jours fériés). 3) Configurer plusieurs plages (ex: 9h-12h et 14h-18h). Cela permet de distinguer les appels 'hors ouverture' des appels manqués pendant vos heures de travail.",
+      "keywords": ["horaires ouverture", "configuration", "heures travail"]
+    },
+    {
+      "id": "calcul-temps-attente",
+      "category": "technique",
+      "question": "Comment est calculé le temps d'attente ?",
+      "answer": "Le temps d'attente représente la durée entre la réception de l'appel et le moment où quelqu'un répond. Dans les relevés OVH, cela correspond à la différence entre l'heure d'arrivée de l'appel et l'heure de réponse. OpenZyra calcule automatiquement : 1) Le temps d'attente moyen. 2) Le temps d'attente maximum. 3) Le temps d'attente par appel répondu. Cela vous aide à évaluer la réactivité de votre équipe.",
+      "keywords": ["temps attente", "calcul", "délai réponse"]
+    },
+    {
+      "id": "export-pdf",
+      "category": "export",
+      "question": "Comment exporter un rapport PDF ?",
+      "answer": "Une fois votre analyse terminée, cliquez sur le bouton 'Exporter' puis 'PDF'. Le rapport généré contient : 1) La page de titre avec votre logo/période. 2) Les statistiques globales (taux de réponse, temps d'attente). 3) Les graphiques horaires et journaliers. 4) Le tableau récapitulatif des appels. 5) Les top agents et top appelants. Le PDF est prêt à imprimer ou partager avec votre équipe.",
+      "keywords": ["export pdf", "rapport pdf", "télécharger pdf"]
+    },
+    {
+      "id": "export-csv",
+      "category": "export",
+      "question": "Puis-je exporter les données filtrées ?",
+      "answer": "Oui, vous pouvez exporter vos données filtrées au format CSV. Après avoir appliqué des filtres (date, numéro, statut, etc.), cliquez sur 'Exporter' puis 'CSV'. Vous obtiendrez un fichier contenant uniquement les appels correspondant à vos critères. C'est pratique pour faire des analyses supplémentaires dans Excel ou partager un sous-ensemble spécifique avec des collègues.",
+      "keywords": ["export csv", "données filtrées", "télécharger"]
+    },
+    {
+      "id": "sauvegarde-projet",
+      "category": "export",
+      "question": "Comment sauvegarder mon analyse ?",
+      "answer": "Utilisez l'export 'Projet ZIP' qui crée un fichier complet contenant : 1) Vos données brutes CSV. 2) Votre configuration (lignes, horaires). 3) Un fichier JSON de métadonnées. Ce fichier ZIP peut être réimporté plus tard dans OpenZyra pour reprendre l'analyse exactement où vous l'aviez laissée. C'est l'idéal pour archiver des analyses mensuelles ou annuelles.",
+      "keywords": ["sauvegarde projet", "archive", "fichier zip"]
+    },
+    {
+      "id": "partager-rapport",
+      "category": "export",
+      "question": "Comment partager un rapport avec mon équipe ?",
+      "answer": "Plusieurs options : 1) Exportez un PDF et envoyez-le par email. 2) Exportez un ZIP de projet et partagez-le via votre cloud d'entreprise. 3) Faites une capture d'écran des statistiques clés. 4) Montrez directement l'écran en réunion (OpenZyra fonctionne sur vidéoprojecteur). N'oubliez pas : les PDF et ZIP ne contiennent que ce que vous avez analysé, pas de données externes.",
+      "keywords": ["partager rapport", "équipe", "collaboration"]
+    },
+    {
+      "id": "imprimer-rapport",
+      "category": "export",
+      "question": "Puis-je imprimer les rapports ?",
+      "answer": "Oui, les rapports PDF générés par OpenZyra sont optimisés pour l'impression. Ils utilisent une mise en page A4 standard avec des couleurs qui restent lisibles en noir et blanc. Vous pouvez aussi utiliser la fonction 'Imprimer' de votre navigateur (Ctrl+P) sur la page d'analyse, le CSS est adapté pour un rendu papier propre.",
+      "keywords": ["imprimer rapport", "impression", "papier"]
+    }
+  ],
+
+  "seo": {
+    "title": "FAQ OpenZyra - Questions fréquentes analyse appels OVH",
+    "description": "Trouvez les réponses à toutes vos questions sur l'analyse de relevés d'appels OVH avec OpenZyra. Gratuit, confidentialité, utilisation, export - tout est expliqué.",
+    "keywords": "faq OpenZyra, questions fréquentes, aide analyse ovh, tutoriel, support"
+  }
+}

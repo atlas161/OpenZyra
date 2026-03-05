@@ -1,0 +1,451 @@
+{
+  "tutorials": [
+    {
+      "id": "telecharger-releves-ovh",
+      "slug": "telecharger-releves-ovh",
+      "title": "Comment télécharger ses relevés d'appels OVH",
+      "description": "Guide complet pour exporter vos relevés téléphoniques au format CSV depuis votre espace client OVH.",
+      "category": "debutant",
+      "difficulty": "Facile",
+      "readTime": "5 min",
+      "icon": "Download",
+      "tags": ["ovh", "csv", "export", "telechargement", "releves"],
+      "seo": {
+        "keywords": "telecharger releves ovh, exporter csv ovh, releves appels ovh, espace client ovh",
+        "metaDescription": "Apprenez à télécharger vos relevés d'appels OVH au format CSV. Guide étape par étape avec captures d'écran."
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Connectez-vous à votre espace client OVH",
+          "content": "Rendez-vous sur www.ovh.com et connectez-vous avec vos identifiants. Accédez à la section 'Téléphonie' dans le menu principal.",
+          "tip": "Assurez-vous d'avoir les droits d'administrateur sur le groupe de téléphonie."
+        },
+        {
+          "step": 2,
+          "title": "Sélectionnez votre groupe de téléphonie",
+          "content": "Dans le tableau de bord Téléphonie, cliquez sur le groupe concerné (ex: 'Groupe-123456'). Puis sélectionnez la ligne que vous souhaitez analyser.",
+          "tip": "Si vous avez plusieurs lignes, vous devrez répéter l'opération pour chacune."
+        },
+        {
+          "step": 3,
+          "title": "Accédez aux statistiques et relevés",
+          "content": "Dans le menu de gauche, cliquez sur 'Relevés détaillés' ou 'Consommation'. Choisissez la période souhaitée (maximum 6 mois par export).",
+          "tip": "Pour une analyse complète avec OpenZyra, exportez les 3 derniers mois."
+        },
+        {
+          "step": 4,
+          "title": "Téléchargez au format CSV",
+          "content": "Cliquez sur le bouton 'Télécharger' ou l'icône de téléchargement. Sélectionnez le format CSV (et non PDF). Choisissez l'encodage UTF-8 si proposé.",
+          "tip": "Le fichier CSV est nécessaire pour OpenZyra. Le format PDF ne peut pas être analysé automatiquement."
+        },
+        {
+          "step": 5,
+          "title": "Vérifiez votre fichier",
+          "content": "Ouvrez le fichier téléchargé avec Excel ou un éditeur de texte. Vérifiez qu'il contient bien les colonnes : Date, Heure, Numéro source, Numéro destination, Durée, Type d'appel.",
+          "tip": "Si les colonnes sont séparées par des points-virgules (;), c'est normal - OpenZyra gère les deux formats."
+        },
+        {
+          "step": 6,
+          "title": "Importez dans OpenZyra",
+          "content": "Rendez-vous sur OpenZyra, glissez-déposez votre fichier CSV dans la zone d'upload. L'analyse démarre automatiquement !",
+          "tip": "Vous pouvez importer plusieurs fichiers CSV simultanément pour une analyse sur plusieurs mois."
+        }
+      ],
+      "relatedTutorials": ["comprendre-ndi-sip", "analyser-appels-manques"],
+      "createdAt": "2026-03-04",
+      "updatedAt": "2026-03-04"
+    },
+    {
+      "id": "comprendre-ndi-sip",
+      "slug": "comprendre-ndi-sip",
+      "title": "Comprendre NDI et SIP : La configuration essentielle",
+      "description": "Apprenez la différence entre NDI (numéro principal) et SIP (postes internes) pour une analyse précise.",
+      "category": "intermediaire",
+      "difficulty": "Moyen",
+      "readTime": "8 min",
+      "icon": "Settings",
+      "tags": ["ndi", "sip", "configuration", "lignes", "postes"],
+      "seo": {
+        "keywords": "ndi sip ovh, numero principal ovh, ligne sip ovh, configuration groupe appel",
+        "metaDescription": "Tout savoir sur NDI et SIP : configurez correctement votre groupe d'appel OVH pour des statistiques parfaites."
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Qu'est-ce qu'un NDI ?",
+          "content": "NDI (Numéro de Destination Interne) est votre numéro principal public. C'est le numéro que vos clients appellent. Dans OpenZyra, il sert de référence pour identifier les appels entrants.",
+          "tip": "Exemple : +33 1 23 45 67 89 est votre NDI."
+        },
+        {
+          "step": 2,
+          "title": "Qu'est-ce qu'un SIP ?",
+          "content": "SIP (Session Initiation Protocol) représente vos postes internes - les téléphones physiques de vos collaborateurs. Quand un appel arrive sur le NDI, il est redirigé vers les lignes SIP.",
+          "tip": "Exemple : sip001, sip002, ou +33 1 23 45 67 90 sont des lignes SIP."
+        },
+        {
+          "step": 3,
+          "title": "Pourquoi cette distinction est cruciale",
+          "content": "OpenZyra calcule le temps d'attente en mesurant la durée entre l'arrivée sur le NDI et la réponse sur un SIP. Sans cette configuration, vos statistiques seront incorrectes.",
+          "tip": "Un appel non décroché = durée sur NDI mais 0 sur tous les SIP."
+        },
+        {
+          "step": 4,
+          "title": "Identifier vos lignes dans OVH",
+          "content": "Dans votre espace client OVH, allez dans Téléphonie > Votre groupe > Lignes. Les NDI sont marqués 'Numéro principal', les SIP sont les 'Lignes associées'.",
+          "tip": "Notez chaque numéro et son type avant de configurer OpenZyra."
+        },
+        {
+          "step": 5,
+          "title": "Configurer dans OpenZyra",
+          "content": "Après import CSV, OpenZyra vous demandera de sélectionner votre NDI principal, puis d'identifier chaque ligne SIP. Attribuez des noms descriptifs (ex: 'Accueil', 'Dr. Dupont').",
+          "tip": "Vous pouvez sauvegarder cette configuration pour les futures analyses."
+        }
+      ],
+      "relatedTutorials": ["telecharger-releves-ovh", "analyser-appels-manques"],
+      "createdAt": "2026-03-04",
+      "updatedAt": "2026-03-04"
+    },
+    {
+      "id": "analyser-temps-attente",
+      "slug": "analyser-temps-attente",
+      "title": "Analyser et réduire le temps d'attente",
+      "description": "Techniques avancées pour identifier les pics d'attente et optimiser votre service client.",
+      "category": "avance",
+      "difficulty": "Avancé",
+      "readTime": "12 min",
+      "icon": "Clock",
+      "tags": ["temps-attente", "optimisation", "performance", "service-client"],
+      "seo": {
+        "keywords": "temps attente appel, reduire attente client, optimisation centre appel, statistiques attente ovh",
+        "metaDescription": "Maîtrisez l'analyse du temps d'attente : identifiez les problèmes et optimisez votre réactivité téléphonique."
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Comprendre le temps d'attente dans OpenZyra",
+          "content": "Le temps d'attente = durée entre l'arrivée de l'appel et la prise en charge. OpenZyra calcule automatiquement : Durée NDI - Durée conversation SIP = Temps d'attente réel.",
+          "tip": "Cette métrique exclut le temps de conversation pour ne mesurer que l'attente effective."
+        },
+        {
+          "step": 2,
+          "title": "Identifier les pics horaires",
+          "content": "Dans le tableau de bord OpenZyra, consultez le graphique 'Distribution horaire'. Les pics rouges indiquent les créneaux avec le plus d'appels manqués ou temps d'attente élevé.",
+          "tip": "Notez les créneaux critiques (généralement 9h-10h et 14h-15h)."
+        },
+        {
+          "step": 3,
+          "title": "Analyser par jour de la semaine",
+          "content": "Le graphique 'Statistiques par jour' révèle les jours les plus chargés. Comparez lundi vs vendredi pour ajuster vos plannings.",
+          "tip": "Les lundis et mercredis sont souvent les plus critiques."
+        },
+        {
+          "step": 4,
+          "title": "Identifier les appels abandon",
+          "content": "Filtrez par statut 'Manqué' et triez par temps d'attente. Les appels avec attente > 30s mais non décrochés indiquent un manque de personnel.",
+          "tip": "Objectif : moins de 5% d'appels manqués pendant les horaires d'ouverture."
+        },
+        {
+          "step": 5,
+          "title": "Optimiser vos plages horaires",
+          "content": "Dans Configuration > Horaires, définissez précisément vos heures d'ouverture. OpenZyra exclura les appels hors horaires du calcul de performance.",
+          "tip": "Si vous fermez à 18h, les appels à 19h ne pénaliseront pas vos stats."
+        },
+        {
+          "step": 6,
+          "title": "Exporter les rapports PDF",
+          "content": "Générez des rapports PDF hebdomadaires pour suivre vos progrès. Partagez-les avec votre équipe pour sensibiliser aux temps d'attente.",
+          "tip": "Fixez des objectifs : temps d'attente moyen < 20s, taux de réponse > 90%."
+        }
+      ],
+      "relatedTutorials": ["comprendre-ndi-sip", "telecharger-releves-ovh"],
+      "createdAt": "2026-03-04",
+      "updatedAt": "2026-03-04"
+    },
+    {
+      "id": "analyser-appels-manques",
+      "slug": "analyser-appels-manques",
+      "title": "Analyser les appels manqués et améliorer le taux de réponse",
+      "description": "Apprenez à identifier les causes des appels manqués et mettez en place des actions correctives.",
+      "category": "intermediaire",
+      "difficulty": "Moyen",
+      "readTime": "10 min",
+      "icon": "PhoneOff",
+      "tags": ["appels-manques", "taux-reponse", "amelioration", "performance"],
+      "seo": {
+        "keywords": "analyser appels manques, taux reponse, ameliorer service client, appels perdus ovh",
+        "metaDescription": "Guide complet pour analyser vos appels manqués et augmenter votre taux de réponse. Techniques et conseils pratiques."
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Comprendre les types d'appels manqués",
+          "content": "Dans OpenZyra, filtrez par statut 'Manqué'. Il y a deux types : les appels hors horaires (normal) et les appels pendant vos heures d'ouverture (problème à résoudre).",
+          "tip": "Concentrez-vous sur les appels manqués pendant vos heures de travail."
+        },
+        {
+          "step": 2,
+          "title": "Identifier les pics d'appels manqués",
+          "content": "Utilisez le graphique 'Distribution horaire' pour voir à quelles heures vous manquez le plus d'appels. Généralement 9h-10h et 14h-15h sont les créneaux critiques.",
+          "tip": "Ces pics correspondent souvent aux arrivées et retours de pause des équipes."
+        },
+        {
+          "step": 3,
+          "title": "Analyser par jour de la semaine",
+          "content": "Le graphique journalier montre quels jours sont les plus problématiques. Les lundis et mercredis sont souvent les plus chargés dans les centres d'appel.",
+          "tip": "Anticipez ces jours en renforçant votre staffing."
+        },
+        {
+          "step": 4,
+          "title": "Calculer votre taux de réponse",
+          "content": "OpenZyra calcule automatiquement : Taux de réponse = Appels répondus / (Appels répondus + Appels manqués). Objectif : > 90% pendant les heures d'ouverture.",
+          "tip": "Un taux de 85% signifie que 1 appel sur 7 est manqué !"
+        },
+        {
+          "step": 5,
+          "title": "Identifier les numéros récurrents",
+          "content": "Dans le tableau des appels manqués, vérifiez si certains numéros appellent plusieurs fois. Ces clients méritent un rappel prioritaire.",
+          "tip": "Un client qui rappelle 3+ fois est un client mécontent."
+        },
+        {
+          "step": 6,
+          "title": "Mettre en place des actions correctives",
+          "content": "Solutions : ajuster les horaires d'équipe, former les agents, mettre en place un système de file d'attente, ou ajouter des lignes SIP pendant les pics.",
+          "tip": "Suivez votre progression chaque semaine avec les rapports PDF."
+        }
+      ],
+      "relatedTutorials": ["analyser-temps-attente", "telecharger-releves-ovh"],
+      "createdAt": "2026-03-04",
+      "updatedAt": "2026-03-04"
+    },
+    {
+      "id": "exporter-rapports-pdf",
+      "slug": "exporter-rapports-pdf",
+      "title": "Exporter et partager des rapports PDF professionnels",
+      "description": "Apprenez à générer des rapports PDF complets pour partager vos analyses avec votre équipe ou votre management.",
+      "category": "debutant",
+      "difficulty": "Facile",
+      "readTime": "7 min",
+      "icon": "FileText",
+      "tags": ["export", "pdf", "rapport", "partage", "management"],
+      "seo": {
+        "keywords": "exporter rapport pdf, rapport analyse appels, partager statistiques, pdf telephonie",
+        "metaDescription": "Guide pour créer des rapports PDF professionnels avec OpenZyra. Partagez vos analyses en quelques clics."
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Finaliser votre analyse",
+          "content": "Avant d'exporter, assurez-vous que vos filtres sont correctement configurés (dates, lignes, statuts). Le PDF contiendra exactement ce qui est affiché à l'écran.",
+          "tip": "Exportez différentes périodes pour comparer vos progrès."
+        },
+        {
+          "step": 2,
+          "title": "Cliquer sur Exporter > PDF",
+          "content": "Dans le tableau de bord, cliquez sur le bouton 'Exporter' puis sélectionnez 'PDF'. La génération prend quelques secondes.",
+          "tip": "Le PDF est généré côté client, vos données restent privées."
+        },
+        {
+          "step": 3,
+          "title": "Vérifier le contenu du rapport",
+          "content": "Le PDF contient : page de garde, statistiques globales, graphiques horaires et journaliers, tableau des appels, top agents et top appelants.",
+          "tip": "Vérifiez que les dates et périodes sont correctes avant de partager."
+        },
+        {
+          "step": 4,
+          "title": "Personnaliser la présentation",
+          "content": "Le rapport utilise automatiquement les noms de vos lignes configurés. Assurez-vous d'avoir nommé vos lignes de manière compréhensible (ex: 'Accueil', 'Support Technique').",
+          "tip": "Des noms descriptifs rendent le rapport plus compréhensible pour tous."
+        },
+        {
+          "step": 5,
+          "title": "Partager avec votre équipe",
+          "content": "Envoyez le PDF par email, Slack, Teams ou tout autre canal. Le fichier peut être ouvert sur n'importe quel appareil sans logiciel particulier.",
+          "tip": "Programmez des réunions hebdomadaires pour discuter des chiffres."
+        },
+        {
+          "step": 6,
+          "title": "Archiver pour suivi long terme",
+          "content": "Gardez vos rapports PDF dans un dossier dédié pour suivre vos progrès sur plusieurs mois. Comparez les KPI d'une période à l'autre.",
+          "tip": "Nommez vos fichiers avec la date : 'Rapport_2026-03_OpenZyra.pdf'"
+        }
+      ],
+      "relatedTutorials": ["analyser-temps-attente", "sauvegarder-projets"],
+      "createdAt": "2026-03-04",
+      "updatedAt": "2026-03-04"
+    },
+    {
+      "id": "sauvegarder-projets",
+      "slug": "sauvegarder-projets",
+      "title": "Sauvegarder et restaurer des projets d'analyse",
+      "description": "Apprenez à sauvegarder vos analyses complètes pour les retrouver plus tard ou les partager avec vos collègues.",
+      "category": "intermediaire",
+      "difficulty": "Moyen",
+      "readTime": "8 min",
+      "icon": "Save",
+      "tags": ["sauvegarde", "projet", "archive", "partage", "restauration"],
+      "seo": {
+        "keywords": "sauvegarder projet OpenZyra, archive analyse, restaurer donnees, partage projet",
+        "metaDescription": "Guide pour sauvegarder et restaurer vos projets OpenZyra. Archivez vos analyses et reprenez-les plus tard."
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Comprendre le format ZIP de projet",
+          "content": "Un projet OpenZyra est un fichier ZIP contenant : les données CSV brutes, votre configuration (lignes, horaires), les métadonnées de l'analyse.",
+          "tip": "C'est comme une 'photo' complète de votre analyse à un moment donné."
+        },
+        {
+          "step": 2,
+          "title": "Exporter un projet",
+          "content": "Après avoir analysé vos données, cliquez sur 'Exporter' puis 'ZIP'. Choisissez un nom descriptif et sauvegardez sur votre ordinateur.",
+          "tip": "Le fichier ZIP contient TOUTE votre analyse - vous pouvez la retrouver exactement comme elle était."
+        },
+        {
+          "step": 3,
+          "title": "Organiser vos archives",
+          "content": "Créez un dossier par année ou par mois. Nommez vos fichiers de manière claire : 'Analyse_Mars2026_GroupePrincipal.zip'.",
+          "tip": "Une bonne organisation vous fera gagner du temps plus tard."
+        },
+        {
+          "step": 4,
+          "title": "Restaurer un projet",
+          "content": "Pour reprendre une analyse sauvegardée, glissez-déposez simplement le fichier ZIP dans OpenZyra. Tout est restauré automatiquement.",
+          "tip": "Pas besoin de reconfigurer vos lignes - tout est conservé dans le ZIP !"
+        },
+        {
+          "step": 5,
+          "title": "Partager avec un collègue",
+          "content": "Envoyez le fichier ZIP à un collègue. Il pourra ouvrir exactement la même analyse sur son ordinateur, avec les mêmes filtres et configurations.",
+          "tip": "Parfait pour la collaboration ou le remplacement d'un responsable."
+        },
+        {
+          "step": 6,
+          "title": "Comprendre les limites",
+          "content": "Le ZIP est une archive à un moment T. Si vous restaurez et modifiez, il faudra exporter à nouveau pour sauvegarder les changements.",
+          "tip": "Versionnez vos analyses importantes : 'Projet_v1.zip', 'Projet_v2.zip'..."
+        }
+      ],
+      "relatedTutorials": ["exporter-rapports-pdf", "telecharger-releves-ovh"],
+      "createdAt": "2026-03-04",
+      "updatedAt": "2026-03-04"
+    },
+    {
+      "id": "configurer-horaires-ouverture",
+      "slug": "configurer-horaires-ouverture",
+      "title": "Configurer les horaires d'ouverture pour des stats précises",
+      "description": "Apprenez à définir vos horaires de travail pour exclure les appels hors créneaux et obtenir des statistiques pertinentes.",
+      "category": "intermediaire",
+      "difficulty": "Moyen",
+      "readTime": "9 min",
+      "icon": "Clock",
+      "tags": ["horaires", "configuration", "plages-horaires", "stats", "precision"],
+      "seo": {
+        "keywords": "configurer horaires ouverture, plages horaires, heures travail, exclusion appels",
+        "metaDescription": "Guide pour configurer les horaires d'ouverture dans OpenZyra. Obtenez des statistiques précises en excluant les appels hors créneaux."
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Comprendre l'importance des horaires",
+          "content": "Sans configuration d'horaires, tous les appels sont comptabilisés de la même façon. Or un appel à 23h ne devrait pas pénaliser votre taux de réponse si vous fermez à 18h !",
+          "tip": "Les horaires permettent de distinguer 'Manqué' de 'Hors Ouverture'."
+        },
+        {
+          "step": 2,
+          "title": "Accéder à la configuration",
+          "content": "Dans OpenZyra, après avoir importé vos données, allez dans 'Configuration' > 'Horaires'. Vous verrez les horaires par défaut (Lu-Ve 9h-18h).",
+          "tip": "Cette configuration est facultative mais fortement recommandée."
+        },
+        {
+          "step": 3,
+          "title": "Définir vos jours d'ouverture",
+          "content": "Cochez les jours où vous êtes ouvert. Par défaut : Lundi au Vendredi. Décochez les jours de fermeture (week-end, jours fériés).",
+          "tip": "Si vous ouvrez le samedi matin, cochez-le et définissez les horaires."
+        },
+        {
+          "step": 4,
+          "title": "Configurer les plages horaires",
+          "content": "Pour chaque jour ouvré, définissez vos heures d'ouverture. Exemple : 8h30-12h et 14h-18h pour une fermeture midi.",
+          "tip": "Vous pouvez définir plusieurs plages par jour (jusqu'à 3)."
+        },
+        {
+          "step": 5,
+          "title": "Sauvegarder la configuration",
+          "content": "Cliquez sur 'Sauvegarder'. Cette configuration sera automatiquement appliquée à toutes vos futures analyses. Elle est stockée dans votre navigateur.",
+          "tip": "Exportez un ZIP de projet pour sauvegarder cette configuration définitivement."
+        },
+        {
+          "step": 6,
+          "title": "Vérifier les résultats",
+          "content": "Retournez au tableau de bord. Les appels hors horaires sont maintenant marqués 'Hors Ouverture' et ne comptent plus dans vos KPIs de performance.",
+          "tip": "Votre taux de réponse ne sera plus faussé par les appels nocturnes !"
+        }
+      ],
+      "relatedTutorials": ["comprendre-ndi-sip", "analyser-appels-manques"],
+      "createdAt": "2026-03-04",
+      "updatedAt": "2026-03-04"
+    },
+    {
+      "id": "utiliser-filtres-avances",
+      "slug": "utiliser-filtres-avances",
+      "title": "Maîtriser les filtres avancés pour des analyses ciblées",
+      "description": "Apprenez à utiliser les filtres pour isoler des segments spécifiques et faire des analyses précises.",
+      "category": "avance",
+      "difficulty": "Avancé",
+      "readTime": "11 min",
+      "icon": "Filter",
+      "tags": ["filtres", "recherche", "segmentation", "analyse-ciblee", "export"],
+      "seo": {
+        "keywords": "utiliser filtres avances, segmentation donnees, analyse ciblee, filtrer appels",
+        "metaDescription": "Guide complet sur les filtres avancés de OpenZyra. Segmentez vos données pour des analyses précises et ciblées."
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Découvrir les filtres disponibles",
+          "content": "OpenZyra propose 6 filtres : Date (plage), Heure (tranche), Appelant (numéro), Appelé (ligne), Statut (Répondu/Manqué/Tous), et Durée.",
+          "tip": "Ces filtres fonctionnent ensemble - combinez-les pour des recherches précises."
+        },
+        {
+          "step": 2,
+          "title": "Filtrer par plage de dates",
+          "content": "Utilisez le sélecteur de dates dans la barre de filtres. Parfait pour isoler une semaine problématique ou comparer deux mois.",
+          "tip": "Le calendrier accepte les raccourcis clavier (flèches, Entrée)."
+        },
+        {
+          "step": 3,
+          "title": "Filtrer par tranche horaire",
+          "content": "Définissez une plage horaire (ex: 9h-10h) pour voir uniquement les appels de ce créneau. Idéal pour analyser les pics d'activité.",
+          "tip": "Combinez avec le filtre de jour pour voir les lundis matins uniquement."
+        },
+        {
+          "step": 4,
+          "title": "Rechercher par numéro d'appelant",
+          "content": "Entrez un numéro de téléphone ou une partie du numéro. OpenZyra cherche dans tous les appels et affiche uniquement ceux correspondants.",
+          "tip": "Utilisez ce filtre pour retrouver l'historique complet d'un client."
+        },
+        {
+          "step": 5,
+          "title": "Filtrer par ligne sollicitée",
+          "content": "Sélectionnez une ou plusieurs lignes SIP pour voir uniquement les appels les concernant. Analysez la performance par agent.",
+          "tip": "Comparez les performances entre différents agents ou départements."
+        },
+        {
+          "step": 6,
+          "title": "Exporter les résultats filtrés",
+          "content": "Une fois vos filtres appliqués, exportez en CSV ou PDF. Le fichier contiendra uniquement les données filtrées, prêtes pour une analyse externe.",
+          "tip": "Créez des rapports segmentés pour différents responsables (ex: par département)."
+        }
+      ],
+      "relatedTutorials": ["exporter-rapports-pdf", "analyser-temps-attente"],
+      "createdAt": "2026-03-04",
+      "updatedAt": "2026-03-04"
+    }
+  ],
+  "categories": [
+    { "id": "debutant", "name": "Débutant", "description": "Premiers pas avec OVH et OpenZyra" },
+    { "id": "intermediaire", "name": "Intermédiaire", "description": "Configuration avancée et analyse" },
+    { "id": "avance", "name": "Avancé", "description": "Optimisation et techniques expertes" }
+  ]
+}
