@@ -52,12 +52,6 @@
 
 # SPA Routing - must be last
 [[redirects]]
-  from = "/google22cc3035411ae422.html"
-  to = "/google22cc3035411ae422.html"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
